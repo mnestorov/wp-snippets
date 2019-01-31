@@ -50,6 +50,11 @@ This is a list of useful WordPress snippets and functions that I often reference
 - [Exclude a Category From WordPress Loops](#exclude-a-category-from-wordpress-loops)
 - [Disable the message "JQMIGRATE: Migrate is installed, version 1.4.1"](#user-content-disable-the-message---jqmigrate-migrate-is-installed-version-141)
 
+**SECURITY**
+
+- [Disable Theme or Plugin Editor in WP Admin](#disable-theme-or-plugin-editor-in-wp-admin)
+- [Remove WordPress Version](#remove-wordpress-version)
+
 **OTHER**
 
 - [Default robots.txt for WordPress](#default-robotstxt-for-wordpress)
@@ -1004,6 +1009,33 @@ add_action('wp_default_scripts', function ($scripts) {
 });
 ```
 
+## Disable Theme or Plugin Editor in WP Admin
+
+```php 
+define('DISALLOW_FILE_EDIT', true); 
+```
+
+**How to implement**
+
+1. Locate the file **_wp-config.php_** in the base directory of your WordPress directory.
+2. Open the file in a text editor.
+3. Past the code above to the end of this file.
+4. Save and close.
+
+## Remove WordPress Version
+
+```php 
+/**
+ * Remove WordPress version.
+ * Better to hide it and keep hackers in the dark.
+ */
+ 
+function remove_wp_version() {
+    return '';
+}
+add_filter('the_generator', 'wpbeginner_remove_version');
+```
+
 ## Default robots.txt for WordPress
 
 ```txt
@@ -1025,7 +1057,6 @@ Sitemap: http://www.sitename.com/page-sitemap.xml
 2. Copy and paste the snippet above to the file
 3. Switch the placeholder information with your unique address and save the file
 4. Drop the file in your root directory for your website
-
 
 ## Simple .htaccess for WordPress
 
