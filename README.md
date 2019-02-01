@@ -49,10 +49,12 @@ This is a list of useful WordPress snippets and functions that I often reference
 - [Reorder Admin Menu Items](#reorder-admin-menu-items)
 - [Exclude a Category From WordPress Loops](#exclude-a-category-from-wordpress-loops)
 - [Disable the message "JQMIGRATE: Migrate is installed, version 1.4.1"](#user-content-disable-the-message---jqmigrate-migrate-is-installed-version-141)
+- [Disable Gutenberg from WordPress 5 without a plugin?](#disable-gutenberg-from-wordpress-5-without-a-plugin)
 
 **WOOCOMMERCE**
 
 - [Create a message for remaining amount of a purchase for free delivery in WooCommerce](#create-a-message-for-remaining-amount-of-a-purchase-for-free-delivery-in-woocommerce)
+- [Change the appearance of a foreign currency in WooCommerce](#change-appearance-foreign-currency-woocommerce)
 
 **SECURITY**
 
@@ -63,6 +65,8 @@ This is a list of useful WordPress snippets and functions that I often reference
 
 - [Default robots.txt for WordPress](#default-robotstxt-for-wordpress)
 - [Simple .htaccess for WordPress](#simple-htaccess-for-wordpress)
+
+# WordPress
 
 ## Hide WordPress Update Nag to All But Admins
 
@@ -1013,6 +1017,28 @@ add_action('wp_default_scripts', function ($scripts) {
 });
 ```
 
+## Disable Gutenberg from WordPress 5 without a plugin?
+
+```php
+add_filter('use_block_editor_for_post', '__return_false');
+```
+
+# WooCommerce
+
+## Change the appearance of a foreign currency in WooCommerce
+
+```php
+function ss_wc_change_uae_currency_symbol( $currency_symbol, $currency ) {
+  switch ( $currency ) {
+    case 'BGN':
+      $currency_symbol = 'BGN';
+    break;
+  }
+  return $currency_symbol;
+}
+add_filter( 'woocommerce_currency_symbol', 'ss_wc_change_uae_currency_symbol', 10, 2 );
+```
+
 ## Create a message for remaining amount of a purchase for free delivery in WooCommerce
 
 ```php
@@ -1056,6 +1082,8 @@ function free_shipping_cart_notice() {
 add_action( 'woocommerce_before_cart', 'free_shipping_cart_notice' );
 ```
 
+# Security
+
 ## Disable Theme or Plugin Editor in WP Admin
 
 ```php 
@@ -1082,6 +1110,8 @@ function remove_wp_version() {
 }
 add_filter('the_generator', 'wpbeginner_remove_version');
 ```
+
+# Other
 
 ## Default robots.txt for WordPress
 
