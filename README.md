@@ -49,12 +49,17 @@ This is a list of useful WordPress snippets and functions that I often reference
 - [Reorder Admin Menu Items](#reorder-admin-menu-items)
 - [Exclude a Category From WordPress Loops](#exclude-a-category-from-wordpress-loops)
 - [Disable the message "JQMIGRATE: Migrate is installed, version 1.4.1"](#user-content-disable-the-message---jqmigrate-migrate-is-installed-version-141)
-- [Disable Gutenberg from WordPress 5 without a plugin?](#disable-gutenberg-from-wordpress-5-without-a-plugin)
+- [Disable Gutenberg from WordPress 5 Without a Plugin](#disable-gutenberg-from-wordpress-5-without-a-plugin)
+- [Disable Automatic Updates in WordPress](#disable-automatic-updates-in-wordpress)
+- [Disable Automatic WordPress Plugin Updates](#disable-automatic-wordpress-plugin-updates)
+- [Disable Automatic WordPress Theme Updates](#disable-automatic-wordpress-theme-updates)
 
 **WOOCOMMERCE**
 
-- [Create a message for remaining amount of a purchase for free delivery in WooCommerce](#create-a-message-for-remaining-amount-of-a-purchase-for-free-delivery-in-woocommerce)
-- [Change the appearance of a foreign currency in WooCommerce](#change-appearance-foreign-currency-woocommerce)
+- [Create a Message for Remaining Amount of a Purchase for Free Delivery in WooCommerce](#create-a-message-for-remaining-amount-of-a-purchase-for-free-delivery-in-woocommerce)
+- [Change the Appearance of a Foreign Currency in WooCommerce](#change-appearance-foreign-currency-woocommerce)
+- [Remove Specific Product Tabs in WooCommerce](#remove-specific-product-tabs-in-woocommerce)
+- [Add a Message to the Login or Registration Form in WooCommerce](#add-a-message-to-the-login-or-registration-form-in-woocommerce)
 
 **SECURITY**
 
@@ -1017,18 +1022,40 @@ add_action('wp_default_scripts', function ($scripts) {
 });
 ```
 
-## Disable Gutenberg from WordPress 5 without a plugin?
+## Disable Gutenberg from WordPress 5 without a plugin
 
 ```php
-add_filter('use_block_editor_for_post', '__return_false');
+add_filter( 'use_block_editor_for_post', '__return_false' );
+```
+
+## Disable Automatic Updates in WordPress
+
+```php
+define( 'WP_AUTO_UPDATE_CORE', false );
+```
+
+**How to implement**
+
+You can disable automatic updates in WordPress by adding this line of code in your **_wp-config.php_**.
+
+## Disable Automatic WordPress Plugin Updates
+
+```php
+add_filter( 'auto_update_plugin', '__return_false' );
+```
+
+## Disable Automatic WordPress Theme Updates
+
+```php
+add_filter( 'auto_update_theme', '__return_false' );
 ```
 
 # WooCommerce
 
-## Change the appearance of a foreign currency in WooCommerce
+## Change the Appearance of a Foreign Currency in WooCommerce
 
 ```php
-function ss_wc_change_uae_currency_symbol( $currency_symbol, $currency ) {
+function wc_change_bgn_currency_symbol( $currency_symbol, $currency ) {
   switch ( $currency ) {
     case 'BGN':
       $currency_symbol = 'BGN';
@@ -1036,17 +1063,17 @@ function ss_wc_change_uae_currency_symbol( $currency_symbol, $currency ) {
   }
   return $currency_symbol;
 }
-add_filter( 'woocommerce_currency_symbol', 'ss_wc_change_uae_currency_symbol', 10, 2 );
+add_filter( 'woocommerce_currency_symbol', 'wc_change_bgn_currency_symbol', 10, 2 );
 ```
 
-## Create a message for remaining amount of a purchase for free delivery in WooCommerce
+## Create a Message for Remaining Amount of a Purchase for Free Delivery in WooCommerce
 
 ```php
 /**
  * Notice with $$$ remaining to Free Shipping @ WooCommerce Cart 
  * Tested with WooCommerce version 3.0.5
  */ 
-function free_shipping_cart_notice() { 
+function wc_free_shipping_cart_notice() { 
   global $woocommerce; 
   // Get Free Shipping Methods for Rest of the World Zone & populate array $min_amounts
   $default_zone = new WC_Shipping_Zone(0); 
@@ -1079,7 +1106,39 @@ function free_shipping_cart_notice() {
        }
     }
 }
-add_action( 'woocommerce_before_cart', 'free_shipping_cart_notice' );
+add_action( 'woocommerce_before_cart', 'wc_free_shipping_cart_notice' );
+```
+
+## Remove Specific Product Tabs in WooCommerce
+
+```php
+function wc_remove_product_tabs( $tabs ) {
+   // remove the description tab
+   unset( $tabs['description'] );
+   
+   // remove the reviews tab
+   unset( $tabs['reviews'] );
+   
+   // remove the additional information tab
+   unset( $tabs['additional_information'] );
+   
+   return $tabs;
+}
+add_filter( 'woocommerce_product_tabs', 'wc_remove_product_tabs', 99 );
+```
+
+## Add a Message to the Login or Registration Form in WooCommerce
+
+```php
+function wc_custom_login_message() {
+   if ( get_option( 'woocommerce_enable_myaccount_registration' ) == 'yes' ) {
+       $html  = '<div class="woocommerce-info">';
+       $html .= '<p>' . _e( 'Your custom message goes here.' ) . '</p>';
+       $html .= '</div>';
+       echo $html;
+   }
+}
+add_action( 'woocommerce_before_customer_login_form', 'wc_custom_login_message' );
 ```
 
 # Security
@@ -1087,7 +1146,7 @@ add_action( 'woocommerce_before_cart', 'free_shipping_cart_notice' );
 ## Disable Theme or Plugin Editor in WP Admin
 
 ```php 
-define('DISALLOW_FILE_EDIT', true); 
+define( 'DISALLOW_FILE_EDIT', true ); 
 ```
 
 **How to implement**
@@ -1108,7 +1167,7 @@ define('DISALLOW_FILE_EDIT', true);
 function remove_wp_version() {
     return '';
 }
-add_filter('the_generator', 'wpbeginner_remove_version');
+add_filter( 'the_generator', 'wpbeginner_remove_version' );
 ```
 
 # Other
@@ -1130,10 +1189,10 @@ Sitemap: http://www.sitename.com/page-sitemap.xml
 
 **How to Implement:**
 
-1. Create a file named robots.txt
-2. Copy and paste the snippet above to the file
-3. Switch the placeholder information with your unique address and save the file
-4. Drop the file in your root directory for your website
+1. Create a file named **_robots.txt_**.
+2. Copy and paste the snippet above to the file.
+3. Switch the placeholder information with your unique address and save the file.
+4. Drop the file in your root directory for your website.
 
 ## Simple .htaccess for WordPress
 
@@ -1152,7 +1211,7 @@ RewriteRule . /index.php [L]
 
 **How to Implement:**
 
-1. Backup your current .htaccess file
-2. Edit a copy of the file and delete the current information
-3. Copy and paste the snippet above to the file
-4. Save the file
+1. Backup your current **_.htaccess_** file.
+2. Edit a copy of the file and delete the current information.
+3. Copy and paste the snippet above to the file.
+4. Save the file.
