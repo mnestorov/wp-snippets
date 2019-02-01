@@ -53,11 +53,12 @@ This is a list of useful WordPress snippets and functions that I often reference
 - [Disable Automatic Updates in WordPress](#disable-automatic-updates-in-wordpress)
 - [Disable Automatic WordPress Plugin Updates](#disable-automatic-wordpress-plugin-updates)
 - [Disable Automatic WordPress Theme Updates](#disable-automatic-wordpress-theme-updates)
+- [Cleanup Image Edits in WordPress](#cleanup-image-edits-in-wordpress)
 
 **WOOCOMMERCE**
 
 - [Create a Message for Remaining Amount of a Purchase for Free Delivery in WooCommerce](#create-a-message-for-remaining-amount-of-a-purchase-for-free-delivery-in-woocommerce)
-- [Change the Appearance of a Foreign Currency in WooCommerce](#change-appearance-foreign-currency-woocommerce)
+- [Change the Appearance of a Foreign Currency in WooCommerce](#change-the-appearance-of-a-foreign-currency-in-woocommerce)
 - [Remove Specific Product Tabs in WooCommerce](#remove-specific-product-tabs-in-woocommerce)
 - [Add a Message to the Login or Registration Form in WooCommerce](#add-a-message-to-the-login-or-registration-form-in-woocommerce)
 
@@ -1049,6 +1050,18 @@ add_filter( 'auto_update_plugin', '__return_false' );
 ```php
 add_filter( 'auto_update_theme', '__return_false' );
 ```
+
+## Cleanup Image Edits in WordPress
+
+```php
+define( 'IMAGE_EDIT_OVERWRITE', true );
+```
+
+By default, WordPress creates a new set of images every time an image is edited. When you restore the original image, the edits are stored on the server. Defining **_IMAGE_EDIT_OVERWRITE_** as **_true_** changes this behaviour. Only one set of image edits are ever created and when you restore the original, the edits are removed from the server.
+
+**How to implement**
+
+You can define cleanup image edits in WordPress by adding this line of code in your **_wp-config.php_**.
 
 # WooCommerce
 
