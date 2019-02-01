@@ -54,6 +54,8 @@ This is a list of useful WordPress snippets and functions that I often reference
 - [Disable Automatic WordPress Plugin Updates](#disable-automatic-wordpress-plugin-updates)
 - [Disable Automatic WordPress Theme Updates](#disable-automatic-wordpress-theme-updates)
 - [Cleanup Image Edits in WordPress](#cleanup-image-edits-in-wordpress)
+- [Specify the Number of Post Revisions](#specify-the-number-of-post-revisions)
+- [Disable Post Revisions](#disable-post-revisions)
 
 **WOOCOMMERCE**
 
@@ -1063,6 +1065,30 @@ By default, WordPress creates a new set of images every time an image is edited.
 
 You can define cleanup image edits in WordPress by adding this line of code in your **_wp-config.php_**.
 
+## Specify the Number of Post Revisions
+
+```php
+define('WP_POST_REVISIONS', 3);
+```
+
+If you want to specify a maximum number of revisions, change false to an integer/number (e.g., 3 or 5).
+
+**How to implement**
+
+You can specify the number of post revisions in WordPress by adding this line of code in your **_wp-config.php_**.
+
+## Disable Post Revisions
+
+```php
+define( 'WP_POST_REVISIONS', false );
+```
+
+By default, WordPress will save copies of each edit made to a post or page, allowing the possibility of reverting to a previous version of that post or page. The saving of revisions can be disabled, or a maximum number of revisions per post or page can be specified.
+
+**How to implement**
+
+You can disable post revisions in WordPress by adding this line of code in your **_wp-config.php_**.
+
 # WooCommerce
 
 ## Change the Appearance of a Foreign Currency in WooCommerce
@@ -1180,7 +1206,7 @@ define( 'DISALLOW_FILE_EDIT', true );
 function remove_wp_version() {
     return '';
 }
-add_filter( 'the_generator', 'wpbeginner_remove_version' );
+add_filter( 'the_generator', 'remove_wp_version' );
 ```
 
 # Other
