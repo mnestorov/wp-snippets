@@ -669,9 +669,11 @@ add_action('init', 'create_custom_post');
 ```
 
 **WordPress Codex**
+
 [Function Reference/register post type](https://codex.wordpress.org/Function_Reference/register_post_type)
 
 **WordPress Developer Resources**
+
 [Dashicons](https://developer.wordpress.org/resource/dashicons/#menu)
 
 ## Implement Preconnect to Google Fonts in Themes
