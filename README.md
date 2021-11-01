@@ -67,6 +67,8 @@ This is a list of useful **WordPress** and **WooCommerce** code snippets and fun
 - [Add a Message to the Login or Registration Form in WooCommerce](#add-a-message-to-the-login-or-registration-form-in-woocommerce)
 - [Display All Products Purchased by User via Shortcode in WooCommerce](#display-all-products-purchased-by-user-via-shortcode-in-woocommerce)
 - [How To Add Custom Post Type to WooCommerce](#how-to-add-custom-post-type-to-woocommerce)
+- [How to Add a New Tab at My Account Page in WooCommerce](#how-to-add-a-new-tab-at-my-account-page-in-woocommerce)
+- [How to Reorder a Custom Tab at My Account Page in WooCommerce](#how-to-reorder-a-custom-tab-at-my-acccount-page-in-woocommerce)
 
 **SECURITY**
 
@@ -91,6 +93,7 @@ function hide_update_notice_to_all_but_admin() {
         remove_action( 'admin_notices', 'update_nag', 3 );
     }
 }
+
 add_action( 'admin_head', 'hide_update_notice_to_all_but_admin', 1 );
 ```
 
@@ -121,6 +124,7 @@ function dashboard_widget_function() {
 function add_dashboard_widgets() {
     wp_add_dashboard_widget( 'custom_dashboard_widget', 'Custom Dashoard Widget', 'dashboard_widget_function' );
 }
+
 add_action( 'wp_dashboard_setup', 'add_dashboard_widgets' );
 ```
 
@@ -144,6 +148,7 @@ function remove_dashboard_widgets() {
 
     remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' );
 }
+
 add_action( 'wp_dashboard_setup', 'remove_dashboard_widgets' );
 ```
 
@@ -156,6 +161,7 @@ add_action( 'wp_dashboard_setup', 'remove_dashboard_widgets' );
 function register_my_menu() {
     register_nav_menu( 'nav-menu', __( 'Navigation Menu' ) );
 }
+
 add_action( 'init', 'register_my_menu' );
 ```
 
@@ -177,6 +183,7 @@ function register_my_menus() {
         )
     );
 }
+
 add_action( 'init', 'register_my_menus' );
 ```
 
@@ -199,6 +206,7 @@ function custom_login_logo() {
         </style>
     ';
 }
+
 add_action( 'login_head', 'custom_login_logo' );
 ```
 
@@ -211,6 +219,7 @@ add_action( 'login_head', 'custom_login_logo' );
 function modify_footer() {
     echo 'Created by <a href="mailto:you@example.com">you</a>.';
 }
+
 add_filter( 'admin_footer_text', 'modify_footer' );
 ```
 
@@ -226,6 +235,7 @@ function custom_scripts() {
     wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.3.6', true );
     wp_enqueue_script( 'script', get_template_directory_uri() . '/js/script.js' );
 }
+
 add_action( 'wp_enqueue_scripts', 'custom_scripts' );
 ```
 
@@ -239,6 +249,7 @@ function google_fonts() {
     wp_register_style( 'OpenSans', '//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' );
     wp_enqueue_style( 'OpenSans' );
 }
+
 add_action( 'wp_print_styles', 'google_fonts' );
 ```
 
@@ -251,6 +262,7 @@ add_action( 'wp_print_styles', 'google_fonts' );
 function custom_excerpt_length( $length ) {
     return 25;
 }
+
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 ```
 
@@ -263,6 +275,7 @@ add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 function custom_read_more_link() {
     return '<a href="' . get_permalink() . '">Read More</a>';
 }
+
 add_filter( 'the_content_more_link', 'custom_read_more_link' );
 ```
 
@@ -275,6 +288,7 @@ add_filter( 'the_content_more_link', 'custom_read_more_link' );
 function custom_more_excerpt( $more ) {
     return '...';
 }
+
 add_filter( 'excerpt_more', 'custom_more_excerpt' );
 ```
 
@@ -295,6 +309,7 @@ function disable_wp_emojicons() {
     add_filter( 'tiny_mce_plugins', 'disable_emojicons_tinymce' );
     add_filter( 'emoji_svg_url', '__return_false' );
 }
+
 add_action( 'init', 'disable_wp_emojicons' );
 
 function disable_emojicons_tinymce( $plugins ) {
@@ -313,6 +328,7 @@ function disable_emojicons_tinymce( $plugins ) {
 function my_remove_admin_menus() {
     remove_menu_page( 'edit-comments.php' );
 }
+
 add_action( 'admin_menu', 'my_remove_admin_menus' );
 
 // Removes from post and pages
@@ -320,14 +336,15 @@ function remove_comment_support() {
     remove_post_type_support( 'post', 'comments' );
     remove_post_type_support( 'page', 'comments' );
 }
+
 add_action( 'init', 'remove_comment_support', 100 );
 
 // Removes from admin bar
 function mytheme_admin_bar_render() {
     global $wp_admin_bar;
-    
     $wp_admin_bar->remove_menu( 'comments' );
 }
+
 add_action( 'wp_before_admin_bar_render', 'mytheme_admin_bar_render' );
 ```
 
@@ -385,6 +402,7 @@ the_post_thumbnail_url( $size );
 function add_categories_for_attachments() {
     register_taxonomy_for_object_type( 'category', 'attachment' );
 }
+
 add_action( 'init' , 'add_categories_for_attachments' );
 ```
 
@@ -397,6 +415,7 @@ add_action( 'init' , 'add_categories_for_attachments' );
 function add_tags_for_attachments() {
     register_taxonomy_for_object_type( 'post_tag', 'attachment' );
 }
+
 add_action( 'init' , 'add_tags_for_attachments' );
 ```
 
@@ -409,6 +428,7 @@ add_action( 'init' , 'add_tags_for_attachments' );
 function add_page_excerpt() {
     add_post_type_support( 'page', array( 'excerpt' ) );
 }
+
 add_action( 'init', 'add_page_excerpt' );
 ```
 
@@ -455,9 +475,9 @@ add_theme_support( 'html5', array( 'search-form' ) );
  */
 function exclude_pages_from_search() {
     global $wp_post_types;
-
     $wp_post_types['page']->exclude_from_search = true;
 }
+
 add_action( 'init', 'exclude_pages_from_search' );
 ```
 
@@ -467,6 +487,7 @@ add_action( 'init', 'exclude_pages_from_search' );
 /**
  * Disable xmlrpc.php
  */
+ 
 add_filter( 'xmlrpc_enabled', '__return_false' );
 remove_action( 'wp_head', 'rsd_link' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
@@ -481,8 +502,7 @@ remove_action( 'wp_head', 'wlwmanifest_link' );
 function escapeHTML($arr) {
     if (version_compare(PHP_VERSION, '5.2.3') >= 0) {
         $output = htmlspecialchars($arr[2], ENT_NOQUOTES, get_bloginfo('charset'), false);
-    }
-    else {
+    } else {
         $specialChars = array(
             '&' => '&amp;',
             '<' => '&lt;',
@@ -491,15 +511,18 @@ function escapeHTML($arr) {
 
         // decode already converted data
         $data = htmlspecialchars_decode( $arr[2] );
-        // escape all data inside <pre>
+        
+	// escape all data inside <pre>
         $output = strtr( $data, $specialChars );
     }
+    
     if (! empty($output)) {
         return  $arr[1] . $output . $arr[3];
-    }    else     {
+    } else {
         return  $arr[1] . $arr[2] . $arr[3];
     }
 }
+
 function filterCode($data) { // Uncomment if you want to escape anything within a <pre> tag
     //$modifiedData = preg_replace_callback( '@(<pre.*>)(.*)(<\/pre>)@isU', 'escapeHTML', $data );
     $modifiedData = preg_replace_callback( '@(<code.*>)(.*)(<\/code>)@isU', 'escapeHTML', $data );
@@ -507,6 +530,7 @@ function filterCode($data) { // Uncomment if you want to escape anything within 
 
     return $modifiedData;
 }
+
 add_filter( 'content_save_pre', 'filterCode', 9 );
 add_filter( 'excerpt_save_pre', 'filterCode', 9 );
 ```
@@ -529,24 +553,26 @@ function custom_settings_page() { ?>
             submit_button();
         ?>
     </form>
-    </div>
-<?php }
+    </div><?php 
+}
 
 function custom_settings_add_menu() {
     add_theme_page( 'Custom Settings', 'Custom Settings', 'manage_options', 'custom-settings', 'custom_settings_page', null, 99 );
 }
+
 add_action( 'admin_menu', 'custom_settings_add_menu' );
 
 // Example setting
 function setting_twitter() { ?>
-    <input type="text" name="twitter" id="twitter" value="<?php echo get_option('twitter'); ?>" />
-<?php }
+    <input type="text" name="twitter" id="twitter" value="<?php echo get_option('twitter'); ?>" /><?php 
+}
 
 function custom_settings_page_setup() {
     add_settings_section( 'section', 'All Settings', null, 'theme-options' );
     add_settings_field( 'twitter', 'Twitter Username', 'setting_twitter', 'theme-options', 'section' );
     register_setting( 'section', 'twitter' );
 }
+
 add_action( 'admin_init', 'custom_settings_page_setup' );
 ```
 
@@ -567,6 +593,7 @@ Modified from [Create a WordPress Theme Settings Page with the Settings API](htt
 function remove_admin_bar() {
     remove_action( 'wp_head', '_admin_bar_bump_cb' );
 }
+
 add_action( 'get_header', 'remove_admin_bar' );
 ```
 
@@ -585,29 +612,31 @@ function meta_og() {
         } 
         $excerpt = strip_tags( $post->post_content );
         $excerpt_more = '';
+	
         if ( strlen($excerpt ) > 155) {
             $excerpt = substr( $excerpt,0,155 );
             $excerpt_more = ' ...';
         }
+	
         $excerpt = str_replace( '"', '', $excerpt );
         $excerpt = str_replace( "'", '', $excerpt );
         $excerptwords = preg_split( '/[\n\r\t ]+/', $excerpt, -1, PREG_SPLIT_NO_EMPTY );
         array_pop( $excerptwords );
-        $excerpt = implode( ' ', $excerptwords ) . $excerpt_more;
-        ?>
-<meta name="author" content="Your Name">
-<meta name="description" content="<?php echo $excerpt; ?>">
-<meta property="og:title" content="<?php echo the_title(); ?>">
-<meta property="og:description" content="<?php echo $excerpt; ?>">
-<meta property="og:type" content="article">
-<meta property="og:url" content="<?php echo the_permalink(); ?>">
-<meta property="og:site_name" content="Your Site Name">
-<meta property="og:image" content="<?php echo $img_src[0]; ?>">
-<?php
+        $excerpt = implode( ' ', $excerptwords ) . $excerpt_more; ?>
+	
+        <meta name="author" content="Your Name">
+        <meta name="description" content="<?php echo $excerpt; ?>">
+        <meta property="og:title" content="<?php echo the_title(); ?>">
+        <meta property="og:description" content="<?php echo $excerpt; ?>">
+        <meta property="og:type" content="article">
+        <meta property="og:url" content="<?php echo the_permalink(); ?>">
+        <meta property="og:site_name" content="Your Site Name">
+        <meta property="og:image" content="<?php echo $img_src[0]; ?>"><?php
     } else {
         return;
     }
 }
+
 add_action('wp_head', 'meta_og', 5);
 ```
 
@@ -639,6 +668,7 @@ function create_custom_post() {
         )
     ));
 }
+
 add_action('init', 'create_custom_post');
 ```
 
@@ -663,7 +693,8 @@ function twentyfifteen_resource_hints( $urls, $relation_type ) {
         // Checks whether the version of WordPress is greater than or equal to 4.7
         // to ensure compatibility with older versions
         // because the 4.7 has become necessary to return an array instead of string
-        if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '>=' ) ) {
+        
+	if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '>=' ) ) {
             // Array with url google fonts and crossorigin
             $urls[] = array(
                 'href' => 'https://fonts.gstatic.com',
@@ -674,8 +705,10 @@ function twentyfifteen_resource_hints( $urls, $relation_type ) {
             $urls[] = 'https://fonts.gstatic.com';
         }
     }
+    
     return $urls;
 }
+
 add_filter( 'wp_resource_hints', 'twentyfifteen_resource_hints', 10, 2 ); 
 ```
 
@@ -688,16 +721,20 @@ add_filter( 'wp_resource_hints', 'twentyfifteen_resource_hints', 10, 2 );
 add_image_size( 'admin-list-thumb', 80, 80, false );
 
 function wpcs_add_thumbnail_columns( $columns ) {
-     
-    if ( !is_array( $columns ) )
+    if ( !is_array( $columns ) ) {
         $columns = array();
+    }
+    
     $new = array();
 
     foreach( $columns as $key => $title ) {
-        if ( $key == 'title' ) // Put the Thumbnail column before the Title column
+        if ( $key == 'title' ) { // Put the Thumbnail column before the Title column
             $new['featured_thumb'] = __( 'Image');
+	}
+	
         $new[$key] = $title;
     }
+    
     return $new;
 }
 
@@ -725,6 +762,7 @@ if ( function_exists( 'add_theme_support' ) ) {
 function first_paragraph( $content ) {
     return preg_replace( '/<p([^>]+)?>/', '<p$1 class="lead">', $content, 1 );
 }
+
 add_filter( 'the_content', 'first_paragraph' );
 ```
 
@@ -737,11 +775,12 @@ Adds a `lead` class to the first paragraph in [the_content](https://developer.wo
  * Exclude custom post type from search
  */
 function excludePages( $query ) {
-if ( $query->is_search ) {
-    $query->set( 'post_type', 'post' );
+   if ( $query->is_search ) {
+      $query->set( 'post_type', 'post' );
+   }
+   return $query;
 }
-    return $query;
-}
+
 add_filter( 'pre_get_posts','excludePages' );
 ```
 
@@ -752,10 +791,13 @@ add_filter( 'pre_get_posts','excludePages' );
  * Remove query string from static resources 
  */
 function remove_cssjs_ver( $src ) {
-    if ( strpos( $src, '?ver=' ) )
+    if ( strpos( $src, '?ver=' ) ) {
         $src = remove_query_arg( 'ver', $src );
+    }
+	
     return $src;
 }
+
 add_filter( 'style_loader_src', 'remove_cssjs_ver', 10, 2 );
 add_filter( 'script_loader_src', 'remove_cssjs_ver', 10, 2 );
 ```
@@ -771,6 +813,7 @@ function modify_jquery() {
     wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js', false, '3.2.1' );
     wp_enqueue_script( 'jquery' );
 }
+
 if (!is_admin()) add_action('wp_enqueue_scripts', 'modify_jquery');
 ```
 
@@ -784,8 +827,10 @@ function disable_website_field( $field ) {
     if( isset($field['url']) ) {
         unset( $field['url'] );
     }
+    
     return $field;
 }
+
 add_filter('comment_form_default_fields', 'disable_website_field');
 ```
 
@@ -845,6 +890,7 @@ function show_tinymce_toolbar( $in ) {
     $in['wordpress_adv_hidden'] = false;
     return $in;
 }
+
 add_filter( 'tiny_mce_before_init', 'show_tinymce_toolbar' );
 ```
 
@@ -864,6 +910,7 @@ function clone_admin_role() {
     // Add new "Client" role with all admin capabilities
     $wp_roles->add_role( 'client', 'Client', $adm->capabilities );
 }
+
 add_action( 'init', 'clone_admin_role' );
 
 /**
@@ -892,6 +939,7 @@ function remove_dashboard_menus() {
         remove_menu_page( 'options-general.php' );
     }
 }
+
 add_action( 'admin_menu', 'remove_dashboard_menus' );
 ```
 
@@ -927,6 +975,7 @@ function remove_dashboard_menus() {
         remove_menu_page( 'options-general.php' );
     }
 }
+
 add_action( 'admin_menu', 'remove_dashboard_menus' );
 ```
 
@@ -955,6 +1004,7 @@ function custom_menu_order( $menu_ord ) {
         );
     }
 }
+
 add_filter( 'custom_menu_order', 'custom_menu_order' );
 add_filter( 'menu_order', 'custom_menu_order' );
 ```
@@ -1069,8 +1119,10 @@ function wc_change_bgn_currency_symbol( $currency_symbol, $currency ) {
       $currency_symbol = 'BGN';
     break;
   }
+  
   return $currency_symbol;
 }
+
 add_filter( 'woocommerce_currency_symbol', 'wc_change_bgn_currency_symbol', 10, 2 );
 ```
 
@@ -1091,6 +1143,7 @@ function wc_free_shipping_cart_notice() {
         if ( $value->min_amount > 0 ) $min_amounts[] = $value->min_amount;
       }
     }
+    
     // Get Free Shipping Methods for all other ZONES & populate array $min_amounts
     $delivery_zones = WC_Shipping_Zones::get_zones();
     foreach ( $delivery_zones as $key => $delivery_zone ) {
@@ -1100,6 +1153,7 @@ function wc_free_shipping_cart_notice() {
         }
       }
     }
+    
     // Find lowest min_amount
     if ( is_array($min_amounts) ) {
        $min_amount = min($min_amounts);
@@ -1114,6 +1168,7 @@ function wc_free_shipping_cart_notice() {
        }
     }
 }
+
 add_action( 'woocommerce_before_cart', 'wc_free_shipping_cart_notice' );
 ```
 
@@ -1132,6 +1187,7 @@ function wc_remove_product_tabs( $tabs ) {
    
    return $tabs;
 }
+
 add_filter( 'woocommerce_product_tabs', 'wc_remove_product_tabs', 99 );
 ```
 
@@ -1146,6 +1202,7 @@ function wc_custom_login_message() {
        echo $html;
    }
 }
+
 add_action( 'woocommerce_before_customer_login_form', 'wc_custom_login_message' );
 ```
 
@@ -1232,6 +1289,7 @@ function wc_get_price($price, $post) {
   if ($post->post->post_type === 'post') {
     $price = get_post_meta($post->id, 'price', true);
   }
+  
   return $price;
 }
 ```
@@ -1265,6 +1323,79 @@ function wc_add_to_cart_button($content) {
 ```
 
 **Note:** You have to call `wc_print_notices()` function in your `single-{post_type}.php`. This will display the messages like: **"'Hello world!' has been added to your cart."**.
+
+# How to Add a New Tab at My Account Page in WooCommerce
+
+```php
+/**
+ * Register new endpoint slug to use for My Account page
+ */
+
+/**
+ * @important-note	Resave permalinks or it will give 404 error
+ */
+function woo_custom_add_premium_support_endpoint() {
+   add_rewrite_endpoint( 'premium-support', EP_ROOT | EP_PAGES );
+}
+  
+add_action( 'init', 'woo_custom_add_premium_support_endpoint' );
+  
+/**
+ * Add new query var
+ */
+  
+function woo_custom_premium_support_query_vars( $vars ) {
+   $vars[] = 'premium-support';
+   return $vars;
+}
+  
+add_filter( 'woocommerce_get_query_vars', 'woo_custom_premium_support_query_vars', 0 );
+  
+/**
+ * Insert the new endpoint into the My Account menu
+ */
+function woo_custom_add_premium_support_link_my_account( $items ) {
+   $items['premium-support'] = 'Premium Support';
+   return $items;
+}
+  
+add_filter( 'woocommerce_account_menu_items', 'woo_custom_add_premium_support_link_my_account' );
+  
+/**
+ * Add content to the new endpoint
+ */
+function woo_custom_premium_support_content() {
+   echo '<h3>Premium WooCommerce Support</h3><p>Welcome to the WooCommerce support area.</p>';
+   echo do_shortcode( ' /* your shortcode here */ ' );
+}
+
+/**
+ * @important-note	"add_action" must follow 'woocommerce_account_{your-endpoint-slug}_endpoint' format
+ */
+add_action( 'woocommerce_account_premium-support_endpoint', 'woo_custom_premium_support_content' );
+```
+
+# How to Reorder a Custom Tab at My Account Page in WooCommerce
+
+```php
+/**
+ * Rename or re-order my account menu items
+ */
+function woo_reorder_my_account_menu() {
+    $neworder = array(
+        'dashboard'          => __( 'Dashboard', 'woocommerce' ),
+        'orders'             => __( 'Previous Orders', 'woocommerce' ),
+        'custom-tab'         => __( 'Custom Tab', 'woocommerce' ),
+        'edit-address'       => __( 'Addresses', 'woocommerce' ),
+        'edit-account'       => __( 'Account Details', 'woocommerce' ),
+        'customer-logout'    => __( 'Logout', 'woocommerce' ),
+    );
+    
+    return $neworder;
+}
+
+add_filter ( 'woocommerce_account_menu_items', 'woo_reorder_my_account_menu' );
+```
 
 # Security
 
