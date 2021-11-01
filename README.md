@@ -63,6 +63,7 @@ This is a list of useful WordPress snippets and functions that I often reference
 - [Change the Appearance of a Foreign Currency in WooCommerce](#change-the-appearance-of-a-foreign-currency-in-woocommerce)
 - [Remove Specific Product Tabs in WooCommerce](#remove-specific-product-tabs-in-woocommerce)
 - [Add a Message to the Login or Registration Form in WooCommerce](#add-a-message-to-the-login-or-registration-form-in-woocommerce)
+- [Display All Products Purchased by User via Shortcode in WooCommerce](#display-all-products-purchased-by-user-via-shortcode-in-woocommerce)
 
 **SECURITY**
 
@@ -1186,6 +1187,66 @@ function wc_custom_login_message() {
    }
 }
 add_action( 'woocommerce_before_customer_login_form', 'wc_custom_login_message' );
+```
+
+## Display All Products Purchased by User via Shortcode in WooCommerce
+
+```php 
+add_shortcode( 'my_products', 'wc_user_products_bought' );
+  
+function wc_user_products_bought() {
+  
+    global $product, $woocommerce, $woocommerce_loop;
+    $columns = 3;
+  
+    // GET USER
+    $current_user = wp_get_current_user();
+  
+    // GET USER ORDERS (COMPLETED + PROCESSING)
+    $customer_orders = get_posts( array(
+        'numberposts' => -1,
+        'meta_key'    => '_customer_user',
+        'meta_value'  => $current_user->ID,
+        'post_type'   => wc_get_order_types(),
+        'post_status' => array_keys( wc_get_is_paid_statuses() ),
+    ) );
+  
+    // LOOP THROUGH ORDERS AND GET PRODUCT IDS
+    if ( ! $customer_orders ) return;
+    
+    $product_ids = array();
+    
+    foreach ( $customer_orders as $customer_order ) {
+        $order = wc_get_order( $customer_order->ID );
+        $items = $order->get_items();
+        foreach ( $items as $item ) {
+            $product_id = $item->get_product_id();
+            $product_ids[] = $product_id;
+        }
+    }
+    $product_ids = array_unique( $product_ids );
+  
+    // QUERY PRODUCTS
+    $args = array(
+       'post_type' => 'product',
+       'post__in' => $product_ids,
+    );
+    
+    $loop = new WP_Query( $args );
+  
+    // GENERATE WC LOOP
+    ob_start();
+    woocommerce_product_loop_start();
+    while ( $loop->have_posts() ) : $loop->the_post();
+    wc_get_template_part( 'content', 'product' ); 
+    endwhile; 
+    woocommerce_product_loop_end();
+    woocommerce_reset_loop();
+    wp_reset_postdata();
+  
+    // RETURN CONTENT
+    return '<div class="woocommerce columns-' . $columns . '">' . ob_get_clean() . '</div>';
+}
 ```
 
 # Security
