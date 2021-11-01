@@ -68,7 +68,7 @@ This is a list of useful **WordPress** and **WooCommerce** code snippets and fun
 - [Display All Products Purchased by User via Shortcode in WooCommerce](#display-all-products-purchased-by-user-via-shortcode-in-woocommerce)
 - [How To Add Custom Post Type to WooCommerce](#how-to-add-custom-post-type-to-woocommerce)
 - [How to Add a New Tab at My Account Page in WooCommerce](#how-to-add-a-new-tab-at-my-account-page-in-woocommerce)
-- [How to Reorder a Custom Tab at My Account Page in WooCommerce](#how-to-reorder-a-custom-tab-at-my-acccount-page-in-woocommerce)
+- [How to Reorder a Custom Tab at My Account Page in WooCommerce](#how-to-reorder-a-custom-tab-at-my-account-page-in-woocommerce)
 
 **SECURITY**
 
