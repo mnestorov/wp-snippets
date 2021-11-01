@@ -1,6 +1,8 @@
 # Useful WordPress/WooCommerce Snippets and Functions
 
-This is a list of useful WordPress snippets and functions that I often reference to enhance or clean up my sites. Please be careful and make backups.
+This is a list of useful **WordPress** and **WooCommerce** code snippets and functions that I often reference to enhance or clean up my sites. 
+
+**Note:** Please be careful and make backups!
 
 **WORDPRESS**
 
@@ -48,7 +50,7 @@ This is a list of useful WordPress snippets and functions that I often reference
 - [Remove Admin Menu Items Depending on Email Address (Domain)](#remove-admin-menu-items-depending-on-email-address-domain)
 - [Reorder Admin Menu Items](#reorder-admin-menu-items)
 - [Exclude a Category From WordPress Loops](#exclude-a-category-from-wordpress-loops)
-- [Disable the message "JQMIGRATE: Migrate is installed, version 1.4.1"](#user-content-disable-the-message---jqmigrate-migrate-is-installed-version-141)
+- [Disable the JQMIGRATE warning message](#disable-the-jqmigrate-warning-message)
 - [Disable Gutenberg from WordPress 5 Without a Plugin](#disable-gutenberg-from-wordpress-5-without-a-plugin)
 - [Disable Automatic Updates in WordPress](#disable-automatic-updates-in-wordpress)
 - [Disable Automatic WordPress Plugin Updates](#disable-automatic-wordpress-plugin-updates)
@@ -84,7 +86,6 @@ This is a list of useful WordPress snippets and functions that I often reference
 /**
  * Hide WordPress update nag to all but admins
  */
- 
 function hide_update_notice_to_all_but_admin() {
     if ( !current_user_can( 'update_core' ) ) {
         remove_action( 'admin_notices', 'update_nag', 3 );
@@ -101,7 +102,6 @@ Make sure to remove the `<title>` tag from your header.
 /**
  * Utilize proper WordPress titles
  */
-
 add_theme_support( 'title-tag' );
 ```
 
@@ -111,7 +111,6 @@ add_theme_support( 'title-tag' );
 /**
  * Create custom WordPress dashboard widget
  */
- 
 function dashboard_widget_function() {
     echo '
         <h2>Custom Dashboard Widget</h2>
@@ -131,7 +130,6 @@ add_action( 'wp_dashboard_setup', 'add_dashboard_widgets' );
 /**
  * Remove all dashboard widgets
  */
- 
 function remove_dashboard_widgets() {
     global $wp_meta_boxes;
     
@@ -155,7 +153,6 @@ add_action( 'wp_dashboard_setup', 'remove_dashboard_widgets' );
 /** 
  * Include navigation menus
  */
-
 function register_my_menu() {
     register_nav_menu( 'nav-menu', __( 'Navigation Menu' ) );
 }
@@ -189,7 +186,6 @@ add_action( 'init', 'register_my_menus' );
 /**
  * Insert custom login logo
  */
- 
 function custom_login_logo() {
     echo '
         <style>
@@ -212,7 +208,6 @@ add_action( 'login_head', 'custom_login_logo' );
 /**
  * Modify admin footer text
  */
- 
 function modify_footer() {
     echo 'Created by <a href="mailto:you@example.com">you</a>.';
 }
@@ -225,7 +220,6 @@ add_filter( 'admin_footer_text', 'modify_footer' );
 /**
  * Enqueue styles and scripts
  */
- 
 function custom_scripts() {
     wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '3.3.6' );
     wp_enqueue_style( 'style', get_template_directory_uri() . '/css/style.css' );
@@ -241,7 +235,6 @@ add_action( 'wp_enqueue_scripts', 'custom_scripts' );
 /**
  * Enqueue Google Fonts
  */
- 
 function google_fonts() {
     wp_register_style( 'OpenSans', '//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' );
     wp_enqueue_style( 'OpenSans' );
@@ -255,7 +248,6 @@ add_action( 'wp_print_styles', 'google_fonts' );
 /**
  * Modify excerpt length
  */
- 
 function custom_excerpt_length( $length ) {
     return 25;
 }
@@ -268,7 +260,6 @@ add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 /**
  * Change Read More link
  */
- 
 function custom_read_more_link() {
     return '<a href="' . get_permalink() . '">Read More</a>';
 }
@@ -281,7 +272,6 @@ add_filter( 'the_content_more_link', 'custom_read_more_link' );
 /**
  * Change More excerpt
  */
- 
 function custom_more_excerpt( $more ) {
     return '...';
 }
@@ -294,7 +284,6 @@ add_filter( 'excerpt_more', 'custom_more_excerpt' );
 /**
  * Disable Emoji mess
  */
- 
 function disable_wp_emojicons() {
     remove_action( 'admin_print_styles', 'print_emoji_styles' );
     remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
@@ -321,7 +310,6 @@ function disable_emojicons_tinymce( $plugins ) {
  */
  
 // Removes from admin menu
-
 function my_remove_admin_menus() {
     remove_menu_page( 'edit-comments.php' );
 }
@@ -349,7 +337,6 @@ add_action( 'wp_before_admin_bar_render', 'mytheme_admin_bar_render' );
 /**
  * Change Media Gallery URL
  */
- 
 if ( empty( get_option( 'upload_url_path' ) ) ) {
     update_option( 'upload_url_path', 'http://assets.website.com/wp-content/uploads' );
 }
@@ -361,7 +348,6 @@ Also, you can filter the option value before it's retrieved from the database, w
 /**
  * Change Media Gallery URL
  */
- 
 add_filter( 'pre_option_upload_url_path', function() {
     return 'http://assets.website.com/wp-content/uploads';
 });
@@ -373,7 +359,6 @@ add_filter( 'pre_option_upload_url_path', function() {
 /**
  * Create custom thumbnail size
  */
- 
 add_image_size( 'custom-thumbnail', 250, 250, true );
 ```
 
@@ -397,7 +382,6 @@ the_post_thumbnail_url( $size );
 /**
  * Add categories for attachments
  */
- 
 function add_categories_for_attachments() {
     register_taxonomy_for_object_type( 'category', 'attachment' );
 }
@@ -410,7 +394,6 @@ add_action( 'init' , 'add_categories_for_attachments' );
 /**
  * Add tags for attachments
  */
- 
 function add_tags_for_attachments() {
     register_taxonomy_for_object_type( 'post_tag', 'attachment' );
 }
@@ -423,7 +406,6 @@ add_action( 'init' , 'add_tags_for_attachments' );
 /**
  * Add custom excerpt to pages
  */
- 
 function add_page_excerpt() {
     add_post_type_support( 'page', array( 'excerpt' ) );
 }
@@ -436,7 +418,6 @@ add_action( 'init', 'add_page_excerpt' );
 /**
  * Create a global string
  */
- 
 function global_string() {
     return 'String';
 }
@@ -454,7 +435,6 @@ echo global_string();
 /**
  * Support featured images
  */
- 
 add_theme_support( 'post-thumbnails' );
 ```
 
@@ -464,7 +444,6 @@ add_theme_support( 'post-thumbnails' );
 /**
  * Support search form
  */
- 
 add_theme_support( 'html5', array( 'search-form' ) );
 ```
 
@@ -474,7 +453,6 @@ add_theme_support( 'html5', array( 'search-form' ) );
 /**
  * Excluding pages from search
  */
- 
 function exclude_pages_from_search() {
     global $wp_post_types;
 
@@ -489,7 +467,6 @@ add_action( 'init', 'exclude_pages_from_search' );
 /**
  * Disable xmlrpc.php
  */
- 
 add_filter( 'xmlrpc_enabled', '__return_false' );
 remove_action( 'wp_head', 'rsd_link' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
@@ -501,7 +478,6 @@ remove_action( 'wp_head', 'wlwmanifest_link' );
 /**
  * Escape HTML in <code> or <pre><code> tags.
  */
- 
 function escapeHTML($arr) {
     if (version_compare(PHP_VERSION, '5.2.3') >= 0) {
         $output = htmlspecialchars($arr[2], ENT_NOQUOTES, get_bloginfo('charset'), false);
@@ -543,7 +519,6 @@ Modified from [Escape HTML](https://wordpress.org/plugins/escape-html/).
 /**
  * Create custom global settings
  */
- 
 function custom_settings_page() { ?>
     <div class="wrap">
     <h1>Custom Settings</h1>
@@ -589,7 +564,6 @@ Modified from [Create a WordPress Theme Settings Page with the Settings API](htt
 /**
  * Remove WordPress admin bar
  */
-
 function remove_admin_bar() {
     remove_action( 'wp_head', '_admin_bar_bump_cb' );
 }
@@ -602,7 +576,6 @@ add_action( 'get_header', 'remove_admin_bar' );
 /**
  * Add Open Graph Meta Tags
  */
-
 function meta_og() {
     global $post;
 
@@ -644,7 +617,6 @@ add_action('wp_head', 'meta_og', 5);
 /**
  * Add custom post type
  */
-
 function create_custom_post() {
     register_post_type( 'custom-post', // slug for custom post type
         array(
@@ -684,7 +656,6 @@ add_action('init', 'create_custom_post');
 /**
  * Implement preconnect to Google Fonts in themes
  */
-
 function twentyfifteen_resource_hints( $urls, $relation_type ) {
     // Checks whether the subject is carrying the source of fonts google and the `$relation_type` equals preconnect.
     // Replace `enqueue_font_id` the `ID` used in loading the source.
@@ -714,7 +685,6 @@ add_filter( 'wp_resource_hints', 'twentyfifteen_resource_hints', 10, 2 );
 /**
  * Add thumbnail column to post listing
  */
-
 add_image_size( 'admin-list-thumb', 80, 80, false );
 
 function wpcs_add_thumbnail_columns( $columns ) {
@@ -752,7 +722,6 @@ if ( function_exists( 'add_theme_support' ) ) {
 /**
  * Add lead class to first paragraph
  */
-
 function first_paragraph( $content ) {
     return preg_replace( '/<p([^>]+)?>/', '<p$1 class="lead">', $content, 1 );
 }
@@ -767,7 +736,6 @@ Adds a `lead` class to the first paragraph in [the_content](https://developer.wo
 /**
  * Exclude custom post type from search
  */
-
 function excludePages( $query ) {
 if ( $query->is_search ) {
     $query->set( 'post_type', 'post' );
@@ -783,7 +751,6 @@ add_filter( 'pre_get_posts','excludePages' );
 /**
  * Remove query string from static resources 
  */
- 
 function remove_cssjs_ver( $src ) {
     if ( strpos( $src, '?ver=' ) )
         $src = remove_query_arg( 'ver', $src );
@@ -799,7 +766,6 @@ add_filter( 'script_loader_src', 'remove_cssjs_ver', 10, 2 );
 /**
  * Modify jQuery
  */
-
 function modify_jquery() {
     wp_deregister_script( 'jquery' );
     wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js', false, '3.2.1' );
@@ -814,7 +780,6 @@ if (!is_admin()) add_action('wp_enqueue_scripts', 'modify_jquery');
 /** 
  * Disable website field from comment form
  */
-
 function disable_website_field( $field ) { 
     if( isset($field['url']) ) {
         unset( $field['url'] );
@@ -830,7 +795,6 @@ add_filter('comment_form_default_fields', 'disable_website_field');
 /** 
  * Disable JSON REST API  
  */
-
 add_filter('json_enabled', '__return_false');
 add_filter('json_jsonp_enabled', '__return_false');
 ```
@@ -841,7 +805,6 @@ add_filter('json_jsonp_enabled', '__return_false');
 /**
  * Switch post type
  */
-
 function switch_post_type ( $old_post_type, $new_post_type ) {
     global $wpdb;
 
@@ -862,7 +825,6 @@ function switch_post_type ( $old_post_type, $new_post_type ) {
 /**
  * PHP Logger
  */
-
 function php_logger( $data ) {
     $output = $data;
     if ( is_array( $output ) )
@@ -879,7 +841,6 @@ function php_logger( $data ) {
 /**
  * Always show second bar in TinyMCE
  */
-
 function show_tinymce_toolbar( $in ) {
     $in['wordpress_adv_hidden'] = false;
     return $in;
@@ -893,7 +854,6 @@ add_filter( 'tiny_mce_before_init', 'show_tinymce_toolbar' );
 /**
  * Clone the administrator user role
  */
-
 function clone_admin_role() {
     global $wp_roles;
     if ( ! isset( $wp_roles ) )
@@ -909,7 +869,6 @@ add_action( 'init', 'clone_admin_role' );
 /**
  * Specify which admin menu items are visible for users with role "Client"
  */
-
 function remove_dashboard_menus() {
     if ( current_user_can( 'client' ) ) {
         // Hide Updates under Dashboard menu
@@ -942,7 +901,6 @@ add_action( 'admin_menu', 'remove_dashboard_menus' );
 /**
  * Specify which users can see admin menu items based on their email address
  */
-
 function remove_dashboard_menus() {
     $user_data = get_userdata( get_current_user_id() );
     $user_email = isset( $user_data->user_email ) ? $user_data->user_email : '';
@@ -976,9 +934,8 @@ add_action( 'admin_menu', 'remove_dashboard_menus' );
 
 ```php
 /**
- * Reorder admin menu
+ * Reorder the Admin Menu
  */
-
 function custom_menu_order( $menu_ord ) {
     if ( ! $menu_ord ) { return true; }
         return array(
@@ -1008,7 +965,6 @@ add_filter( 'menu_order', 'custom_menu_order' );
 /**
  * Exclude a category from all WordPress loops
  */
-
 add_action( 'pre_get_posts', function( $query ) { // anonymous callback
     
     global $wp_query; 
@@ -1025,9 +981,12 @@ add_action( 'pre_get_posts', function( $query ) { // anonymous callback
 });
 ```
 
-## Disable the message - JQMIGRATE: Migrate is installed, version 1.4.1
+## Disable the JQMIGRATE Warning Message
 
 ```php
+/**
+ * Disable the message "JQMIGRATE: Migrate is installed version 1.4.1"
+ */
 add_action('wp_default_scripts', function ($scripts) {
     if (!empty($scripts->registered['jquery'])) {
         $scripts->registered['jquery']->deps = array_diff($scripts->registered['jquery']->deps, ['jquery-migrate']);
@@ -1200,10 +1159,10 @@ function wc_user_products_bought() {
     global $product, $woocommerce, $woocommerce_loop;
     $columns = 3;
   
-    // GET USER
+    // Get user
     $current_user = wp_get_current_user();
   
-    // GET USER ORDERS (COMPLETED + PROCESSING)
+    // Get user orders (COMPLETED + PROCESSING)
     $customer_orders = get_posts( array(
         'numberposts' => -1,
         'meta_key'    => '_customer_user',
@@ -1212,7 +1171,7 @@ function wc_user_products_bought() {
         'post_status' => array_keys( wc_get_is_paid_statuses() ),
     ) );
   
-    // LOOP THROUGH ORDERS AND GET PRODUCT IDS
+    // Loop Through orders and get product IDs
     if ( ! $customer_orders ) return;
     
     $product_ids = array();
@@ -1227,7 +1186,7 @@ function wc_user_products_bought() {
     }
     $product_ids = array_unique( $product_ids );
   
-    // QUERY PRODUCTS
+    // Query products
     $args = array(
        'post_type' => 'product',
        'post__in' => $product_ids,
@@ -1235,7 +1194,7 @@ function wc_user_products_bought() {
     
     $loop = new WP_Query( $args );
   
-    // GENERATE WC LOOP
+    // Generate WC loop
     ob_start();
     woocommerce_product_loop_start();
     while ( $loop->have_posts() ) : $loop->the_post();
@@ -1245,7 +1204,7 @@ function wc_user_products_bought() {
     woocommerce_reset_loop();
     wp_reset_postdata();
   
-    // RETURN CONTENT
+    // Return content
     return '<div class="woocommerce columns-' . $columns . '">' . ob_get_clean() . '</div>';
 }
 ```
@@ -1329,7 +1288,6 @@ define( 'DISALLOW_FILE_EDIT', true );
  * Remove WordPress version.
  * Better to hide it and keep hackers in the dark.
  */
- 
 function remove_wp_version() {
     return '';
 }
