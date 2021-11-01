@@ -64,6 +64,7 @@ This is a list of useful WordPress snippets and functions that I often reference
 - [Remove Specific Product Tabs in WooCommerce](#remove-specific-product-tabs-in-woocommerce)
 - [Add a Message to the Login or Registration Form in WooCommerce](#add-a-message-to-the-login-or-registration-form-in-woocommerce)
 - [Display All Products Purchased by User via Shortcode in WooCommerce](#display-all-products-purchased-by-user-via-shortcode-in-woocommerce)
+- [How To Add Custom Post Type to WooCommerce](#how-to-add-custom-post-type-to-woocommerce)
 
 **SECURITY**
 
@@ -1248,6 +1249,63 @@ function wc_user_products_bought() {
     return '<div class="woocommerce columns-' . $columns . '">' . ob_get_clean() . '</div>';
 }
 ```
+
+## How To Add Custom Post Type to WooCommerce?
+
+**Step 1**
+
+```php
+/**
+ * Your post type should have a custom field called 'price'. 
+ * We just have to make sure that its meta key is '_price'. 
+ * How to check that? You can try to inspect the element:  
+ * 1) Visit your post type admin page. 
+ * 2) Try to add or edit a post in your post type admin page. 
+ * 3) Look for the text box that has the price label and right click on the text box. 
+ * 4) You should find it's name attribute to be '_price'. 
+ * Usually the name is the meta key for a custom field.
+ *
+ * Add the code below if your meta key is not '_price'
+ */
+add_filter('woocommerce_get_price','wc_get_price', 20, 2);
+
+function wc_get_price($price, $post) {
+	 if ($post->post->post_type === 'post') {
+		   $price = get_post_meta($post->id, 'price', true);
+  }
+	 return $price;
+}
+```
+
+**Step 2**
+
+```php
+/**
+ * You're now able to add a custom post type to the cart.
+ * Now we have to create our own "Add to Cart" button.
+ */
+add_filter('the_content', 'wc_add_to_cart_button', 20, 1);
+
+function wc_add_to_cart_button($content) {
+	 global $post;
+ 
+	 if ($post->post_type !== 'post') {
+    return $content; 
+  }
+	
+	 ob_start(); ?>
+ 
+	 <form action="" method="post">
+		  <input name="add-to-cart" type="hidden" value="<?php echo $post->ID ?>">
+		  <input name="quantity" type="number" value="1" min="1">
+		  <input name="submit" type="submit" value="Add to cart>
+	 </form><?php
+	
+	 return $content . ob_get_clean();
+}
+```
+
+**Note:** You have to call `wc_print_notices()` function in your `single-{post_type}.php`. This will display the messages like: **"'Hello world!' has been added to your cart."**.
 
 # Security
 
