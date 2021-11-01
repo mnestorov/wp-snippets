@@ -1324,7 +1324,7 @@ function wc_add_to_cart_button($content) {
 
 **Note:** You have to call `wc_print_notices()` function in your `single-{post_type}.php`. This will display the messages like: **"'Hello world!' has been added to your cart."**.
 
-# How to Add a New Tab at My Account Page in WooCommerce
+## How to Add a New Tab at My Account Page in WooCommerce
 
 ```php
 /**
@@ -1375,7 +1375,7 @@ function woo_custom_premium_support_content() {
 add_action( 'woocommerce_account_premium-support_endpoint', 'woo_custom_premium_support_content' );
 ```
 
-# How to Reorder a Custom Tab at My Account Page in WooCommerce
+## How to Reorder a Custom Tab at My Account Page in WooCommerce
 
 ```php
 /**
