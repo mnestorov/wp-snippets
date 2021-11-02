@@ -58,6 +58,8 @@ This is a list of useful **WordPress** and **WooCommerce** code snippets and fun
 - [Cleanup Image Edits in WordPress](#cleanup-image-edits-in-wordpress)
 - [Specify the Number of Post Revisions](#specify-the-number-of-post-revisions)
 - [Disable Post Revisions](#disable-post-revisions)
+- [Show Popular Posts Without Plugins](#show-popular-posts-without-plugins)
+- [Linking Images Within a Theme](#linking-images-within-a-theme)
 
 **WOOCOMMERCE**
 
@@ -1107,6 +1109,40 @@ By default, WordPress will save copies of each edit made to a post or page, allo
 **How to implement**
 
 You can disable post revisions in WordPress by adding this line of code in your **_wp-config.php_**.
+
+## Show Popular Posts Without Plugins
+
+```php
+/**
+ * Show Popular Posts Without Plugins
+ */
+function count_post_visits() {
+    if( is_single() ) {
+        global $post;
+        $views = get_post_meta( $post->ID, 'my_post_viewed', true );
+        if( $views == '' ) {
+            update_post_meta( $post->ID, 'my_post_viewed', '1' );   
+        } else {
+            $views_no = intval( $views );
+            update_post_meta( $post->ID, 'my_post_viewed', ++$views_no );
+        }
+    }
+}
+
+add_action( 'wp_head', 'count_post_visits' );
+```
+
+## Linking Images Within a Theme
+
+```php
+<img src="<?php bloginfo('stylesheet_directory'); ?>/img/image.png" />
+```
+
+or
+
+```php
+<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/image.jpg" />
+```
 
 # WooCommerce
 
