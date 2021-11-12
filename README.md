@@ -60,6 +60,8 @@ This is a list of useful **WordPress** and **WooCommerce** code snippets and fun
 - [Disable Post Revisions](#disable-post-revisions)
 - [Show Popular Posts Without Plugins](#show-popular-posts-without-plugins)
 - [Linking Images Within a Theme](#linking-images-within-a-theme)
+- [Display different menus to logged-in users](#display-different-menus-to-logged-in-users)
+- [Send email to admin if user updated his profile](#send-email-to-admin-if-user-updated-his-profile)
 
 **WOOCOMMERCE**
 
@@ -1142,6 +1144,40 @@ or
 
 ```php
 <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/image.jpg" />
+```
+
+## Display different menus to logged-in users
+
+```php
+function nav_menu_args( $args = '' ) {
+    if ( is_user_logged_in() ) {
+        $args['menu'] = 'Logged-In'; // we need to create this menu
+    } else {
+        $args['menu'] = 'Primary Menu'; // we need to create this menu
+    }
+
+    return $args;
+}
+
+add_filter( 'wp_nav_menu_args', 'nav_menu_args' );
+```
+
+## Send email to admin if user updated his profile
+
+```php
+function user_profile_update( $user_id ) {
+    $user_info = get_userdata( $user_id );
+
+    $to       = get_option( 'admin_email' );
+    $subject  = 'User Profile Updated';
+    $message  = "Hello Administrator,\n\nThe " . $user_info->user_nicename . " (" . $user_info->user_email . ") profile has been updated! \n\n";
+    $message .= "Site URL: " . get_bloginfo( 'wpurl' ) . "\n\n";
+    $message .= "Regards, \n" . get_option( 'blogname' );
+
+    wp_mail( $to, $subject, $message );
+}
+
+add_action( 'profile_update', 'user_profile_update', 10, 2 );
 ```
 
 # WooCommerce
