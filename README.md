@@ -22,6 +22,7 @@ This is a list of useful **WordPress** and **WooCommerce** code snippets and fun
 - [Remove Comments](#remove-comments)
 - [Change Media Gallery URL](#change-media-gallery-url)
 - [Create Custom Thumbnail Size](#create-custom-thumbnail-size)
+- [Allow Additional File Formats For the Media Library](#allow-additional-file-formats-for-the-media-library)
 - [Add Categories for Attachments](#add-categories-for-attachments)
 - [Add Tags for Attachments](#add-tags-for-attachments)
 - [Add Custom Excerpt to Pages](#add-custom-excerpt-to-pages)
@@ -396,6 +397,27 @@ Since WordPress 4.4.0, you can use:
 ```php
 the_post_thumbnail_url( $size );
 ```
+
+## Allow Additional File Formats For the Media Library
+
+```php
+/**
+ * This code allows you to upload the file formats ZIP, MOBI, PDF, and EPUB
+ */
+function add_custom_mime_types( $mimes ) {
+    $new_file_types = array (
+        'zip'  => 'application/zip',
+        'mobi' => 'application/x-mobipocket-ebook',
+        'pdf'  => 'application/pdf',
+        'epub' => 'application/epub+zip'
+    );
+    
+    return array_merge( $mimes, $new_file_types );
+}
+
+add_filter( 'upload_mimes', 'add_custom_mime_types' );
+```
+
 
 ## Add Categories for Attachments
 
