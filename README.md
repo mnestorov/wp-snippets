@@ -87,7 +87,7 @@ This is a list of useful **WordPress** and **WooCommerce** code snippets and fun
 
 # WordPress
 
-## Hide WordPress Update Nag to All But Admins
+## Hide WordPress Update Nag To All But Admins
 
 ```php
 /**
@@ -182,8 +182,8 @@ Here's the code for multiple menus:
 function register_my_menus() {
     register_nav_menus(
         array(
-            'new-menu' => __( 'New Menu' ),
-            'another-menu' => __( 'Another Menu' ),
+            'new-menu'      => __( 'New Menu' ),
+            'another-menu'  => __( 'Another Menu' ),
             'an-extra-menu' => __( 'An Extra Menu' ),
         )
     );
@@ -228,7 +228,7 @@ function modify_footer() {
 add_filter( 'admin_footer_text', 'modify_footer' );
 ```
 
-## Enqueue Styles and Scripts
+## Enqueue Styles And Scripts
 
 ```php
 /**
@@ -419,7 +419,7 @@ add_filter( 'upload_mimes', 'add_custom_mime_types' );
 ```
 
 
-## Add Categories for Attachments
+## Add Categories For Attachments
 
 ```php
 /**
@@ -432,7 +432,7 @@ function add_categories_for_attachments() {
 add_action( 'init' , 'add_categories_for_attachments' );
 ```
 
-## Add Tags for Attachments
+## Add Tags For Attachments
 
 ```php
 /**
@@ -445,7 +445,7 @@ function add_tags_for_attachments() {
 add_action( 'init' , 'add_tags_for_attachments' );
 ```
 
-## Add Custom Excerpt to Pages
+## Add Custom Excerpt To Pages
 
 ```php
 /**
@@ -458,7 +458,7 @@ function add_page_excerpt() {
 add_action( 'init', 'add_page_excerpt' );
 ```
 
-## Create a Global String
+## Create A Global String
 
 ```php
 /**
@@ -519,7 +519,7 @@ remove_action( 'wp_head', 'rsd_link' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
 ```
 
-## Escape HTML in Posts
+## Escape HTML In Posts
 
 ```php
 /**
@@ -549,7 +549,7 @@ function escapeHTML($arr) {
     }
 }
 
-function filterCode($data) { // Uncomment if you want to escape anything within a <pre> tag
+function filterCode( $data ) { // Uncomment if you want to escape anything within a <pre> tag
     //$modifiedData = preg_replace_callback( '@(<pre.*>)(.*)(<\/pre>)@isU', 'escapeHTML', $data );
     $modifiedData = preg_replace_callback( '@(<code.*>)(.*)(<\/code>)@isU', 'escapeHTML', $data );
     $modifiedData = preg_replace_callback( '@(<tt.*>)(.*)(<\/tt>)@isU', 'escapeHTML', $modifiedData );
@@ -678,24 +678,24 @@ function create_custom_post() {
         'labels' => array(
             'name' => __( 'Custom Post' ),
         ),
-        'public' => true,
+        'public'       => true,
         'hierarchical' => true, 
-        'has_archive' => true,
-        'supports' => array(
+        'has_archive'  => true,
+        'supports'     => array(
             'title',
             'editor',
             'excerpt',
-            'thumbnail'
+            'thumbnail',
         ), 
         'can_export' => true,
         'taxonomies' => array(
-                'post_tag',
-                'category'
+             'post_tag',
+              category',
         )
     ));
 }
 
-add_action('init', 'create_custom_post');
+add_action( 'init', 'create_custom_post' );
 ```
 
 **WordPress Codex**
@@ -706,7 +706,7 @@ add_action('init', 'create_custom_post');
 
 [Dashicons](https://developer.wordpress.org/resource/dashicons/#menu)
 
-## Implement Preconnect to Google Fonts in Themes
+## Implement Preconnect To Google Fonts In Themes
 
 ```php
 /**
@@ -738,7 +738,7 @@ function twentyfifteen_resource_hints( $urls, $relation_type ) {
 add_filter( 'wp_resource_hints', 'twentyfifteen_resource_hints', 10, 2 ); 
 ```
 
-## Add Thumbnail Column to Post Listing
+## Add Thumbnail Column To Post Listing
 
 ```php
 /**
@@ -779,7 +779,7 @@ if ( function_exists( 'add_theme_support' ) ) {
     add_action( 'manage_posts_custom_column' , 'wpcs_add_thumbnail_columns_data', 10, 2 );
 }
 ```
-## Add Lead Class to First Paragraph
+## Add Lead Class To First Paragraph
 
 ```php
 /**
@@ -794,7 +794,7 @@ add_filter( 'the_content', 'first_paragraph' );
 
 Adds a `lead` class to the first paragraph in [the_content](https://developer.wordpress.org/reference/functions/the_content/).
 
-## Exclude Custom Post Type from Search
+## Exclude Custom Post Type From Search
 
 ```php
 /**
@@ -810,7 +810,7 @@ function excludePages( $query ) {
 add_filter( 'pre_get_posts','excludePages' );
 ```
 
-## Remove Query String from Static Resources
+## Remove Query String From Static Resources
 
 ```php
 /**
@@ -840,7 +840,7 @@ function modify_jquery() {
     wp_enqueue_script( 'jquery' );
 }
 
-if (!is_admin()) add_action('wp_enqueue_scripts', 'modify_jquery');
+if ( ! is_admin() ) add_action( 'wp_enqueue_scripts', 'modify_jquery' );
 ```
 
 ##  Disable Website Field From Comment Form
@@ -866,8 +866,8 @@ add_filter('comment_form_default_fields', 'disable_website_field');
 /** 
  * Disable JSON REST API  
  */
-add_filter('json_enabled', '__return_false');
-add_filter('json_jsonp_enabled', '__return_false');
+add_filter( 'json_enabled', '__return_false' );
+add_filter( 'json_jsonp_enabled', '__return_false' );
 ```
 
 ## Switch Post Type
@@ -906,7 +906,7 @@ function php_logger( $data ) {
 }
 ```
 
-## Always Show Second Bar in TinyMCE
+## Always Show Second Bar In TinyMCE
 
 ```php
 /**
@@ -920,7 +920,7 @@ function show_tinymce_toolbar( $in ) {
 add_filter( 'tiny_mce_before_init', 'show_tinymce_toolbar' );
 ```
 
-## Remove Admin Menu Items Depending on User Role
+## Remove Admin Menu Items Depending On User Role
 
 ```php
 /**
@@ -969,7 +969,7 @@ function remove_dashboard_menus() {
 add_action( 'admin_menu', 'remove_dashboard_menus' );
 ```
 
-## Remove Admin Menu Items Depending on Email Address (domain)
+## Remove Admin Menu Items Depending On Email Address (domain)
 
 ```php
 /**
@@ -1035,7 +1035,7 @@ add_filter( 'custom_menu_order', 'custom_menu_order' );
 add_filter( 'menu_order', 'custom_menu_order' );
 ```
 
-## Exclude a Category From WordPress Loops
+## Exclude A Category From WordPress Loops
 
 ```php
 /**
@@ -1057,7 +1057,7 @@ add_action( 'pre_get_posts', function( $query ) { // anonymous callback
 });
 ```
 
-## Disable the JQMIGRATE Warning Message
+## Disable The JQMIGRATE Warning Message
 
 ```php
 /**
@@ -1070,13 +1070,13 @@ add_action('wp_default_scripts', function ($scripts) {
 });
 ```
 
-## Disable Gutenberg from WordPress 5 without a plugin
+## Disable Gutenberg From WordPress 5 Without A Plugin
 
 ```php
 add_filter( 'use_block_editor_for_post', '__return_false' );
 ```
 
-## Disable Automatic Updates in WordPress
+## Disable Automatic Updates In WordPress
 
 ```php
 define( 'WP_AUTO_UPDATE_CORE', false );
@@ -1098,7 +1098,7 @@ add_filter( 'auto_update_plugin', '__return_false' );
 add_filter( 'auto_update_theme', '__return_false' );
 ```
 
-## Cleanup Image Edits in WordPress
+## Cleanup Image Edits In WordPress
 
 ```php
 define( 'IMAGE_EDIT_OVERWRITE', true );
@@ -1110,7 +1110,7 @@ By default, WordPress creates a new set of images every time an image is edited.
 
 You can define cleanup image edits in WordPress by adding this line of code in your **_wp-config.php_**.
 
-## Specify the Number of Post Revisions
+## Specify The Number Of Post Revisions
 
 ```php
 define('WP_POST_REVISIONS', 3);
@@ -1156,10 +1156,10 @@ function count_post_visits() {
 add_action( 'wp_head', 'count_post_visits' );
 ```
 
-## Linking Images Within a Theme
+## Linking Images Within A Theme
 
 ```php
-<img src="<?php bloginfo('stylesheet_directory'); ?>/img/image.png" />
+<img src="<?php bloginfo( 'stylesheet_directory' ); ?>/img/image.png" />
 ```
 
 or
@@ -1168,7 +1168,7 @@ or
 <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/image.jpg" />
 ```
 
-## Display different menus to logged-in users
+## Display Different Menus To Logged-In Users
 
 ```php
 function nav_menu_args( $args = '' ) {
@@ -1184,7 +1184,7 @@ function nav_menu_args( $args = '' ) {
 add_filter( 'wp_nav_menu_args', 'nav_menu_args' );
 ```
 
-## Send email to admin if user updated his profile
+## Send Email To Admin If User Updated His Profile
 
 ```php
 function user_profile_update( $user_id ) {
@@ -1204,7 +1204,7 @@ add_action( 'profile_update', 'user_profile_update', 10, 2 );
 
 # WooCommerce
 
-## Change the Appearance of a Foreign Currency in WooCommerce
+## Change The Appearance Of A Foreign Currency In WooCommerce
 
 ```php
 function wc_change_bgn_currency_symbol( $currency_symbol, $currency ) {
@@ -1220,7 +1220,7 @@ function wc_change_bgn_currency_symbol( $currency_symbol, $currency ) {
 add_filter( 'woocommerce_currency_symbol', 'wc_change_bgn_currency_symbol', 10, 2 );
 ```
 
-## Create a Message for Remaining Amount of a Purchase for Free Delivery in WooCommerce
+## Create A Message For Remaining Amount Of A Purchase For Free Delivery In WooCommerce
 
 ```php
 /**
@@ -1266,7 +1266,7 @@ function wc_free_shipping_cart_notice() {
 add_action( 'woocommerce_before_cart', 'wc_free_shipping_cart_notice' );
 ```
 
-## Remove Specific Product Tabs in WooCommerce
+## Remove Specific Product Tabs In WooCommerce
 
 ```php
 function wc_remove_product_tabs( $tabs ) {
@@ -1285,7 +1285,7 @@ function wc_remove_product_tabs( $tabs ) {
 add_filter( 'woocommerce_product_tabs', 'wc_remove_product_tabs', 99 );
 ```
 
-## Add a Message to the Login or Registration Form in WooCommerce
+## Add A Message To The Login Or Registration Form In WooCommerce
 
 ```php
 function wc_custom_login_message() {
@@ -1300,7 +1300,7 @@ function wc_custom_login_message() {
 add_action( 'woocommerce_before_customer_login_form', 'wc_custom_login_message' );
 ```
 
-## Display All Products Purchased by User via Shortcode in WooCommerce
+## Display All Products Purchased By User Via Shortcode In WooCommerce
 
 ```php 
 add_shortcode( 'my_products', 'wc_user_products_bought' );
@@ -1360,7 +1360,7 @@ function wc_user_products_bought() {
 }
 ```
 
-## How To Add Custom Post Type to WooCommerce
+## How To Add Custom Post Type To WooCommerce
 
 **Step 1**
 
@@ -1418,7 +1418,7 @@ function wc_add_to_cart_button($content) {
 
 **Note:** You have to call `wc_print_notices()` function in your `single-{post_type}.php`. This will display the messages like: **"'Hello world!' has been added to your cart."**.
 
-## How to Add a New Tab at My Account Page in WooCommerce
+## How To Add A New Tab At My Account Page iIn WooCommerce
 
 ```php
 /**
@@ -1469,7 +1469,7 @@ function woo_custom_premium_support_content() {
 add_action( 'woocommerce_account_premium-support_endpoint', 'woo_custom_premium_support_content' );
 ```
 
-## How to Reorder a Custom Tab at My Account Page in WooCommerce
+## How To Reorder A Custom Tab At My Account Page In WooCommerce
 
 ```php
 /**
@@ -1493,7 +1493,7 @@ add_filter ( 'woocommerce_account_menu_items', 'woo_reorder_my_account_menu' );
 
 # Security
 
-## Disable Theme or Plugin Editor in WP Admin
+## Disable Theme Or Plugin Editor In WP Admin
 
 ```php 
 define( 'DISALLOW_FILE_EDIT', true ); 
@@ -1521,7 +1521,7 @@ add_filter( 'the_generator', 'remove_wp_version' );
 
 # Other
 
-## Default robots.txt for WordPress
+## Default robots.txt For WordPress
 
 ```txt
 User-Agent: *
@@ -1543,7 +1543,7 @@ Sitemap: http://www.sitename.com/page-sitemap.xml
 3. Switch the placeholder information with your unique address and save the file.
 4. Drop the file in your root directory for your website.
 
-## Simple .htaccess for WordPress
+## Simple .htaccess For WordPress
 
 ```txt
 # BEGIN WordPress
