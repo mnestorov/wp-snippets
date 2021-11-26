@@ -6,14 +6,14 @@ This is a list of useful **WordPress** and **WooCommerce** code snippets and fun
 
 **WORDPRESS**
 
-- [Hide WordPress Update Nag to All But Admins](#hide-wordpress-update-nag-to-all-but-admins)
+- [Hide WordPress Update Nag To All But Admins](#hide-wordpress-update-nag-to-all-but-admins)
 - [Utilize Proper WordPress Titles](#utilize-proper-wordpress-titles)
 - [Create Custom WordPress Dashboard Widget](#create-custom-wordpress-dashboard-widget)
 - [Remove All Dashboard Widgets](#remove-all-dashboard-widgets)
 - [Include Navigation Menus](#include-navigation-menus)
 - [Insert Custom Login Logo](#insert-custom-login-logo)
 - [Modify Admin Footer Text](#modify-admin-footer-text)
-- [Enqueue Styles and Scripts](#enqueue-styles-and-scripts)
+- [Enqueue Styles And Scripts](#enqueue-styles-and-scripts)
 - [Enqueue Google Fonts](#enqueue-google-fonts)
 - [Modify Excerpt Length](#modify-excerpt-length)
 - [Change Read More Link](#change-read-more-link)
@@ -22,68 +22,69 @@ This is a list of useful **WordPress** and **WooCommerce** code snippets and fun
 - [Remove Comments](#remove-comments)
 - [Change Media Gallery URL](#change-media-gallery-url)
 - [Create Custom Thumbnail Size](#create-custom-thumbnail-size)
-- [Allow Additional File Formats For the Media Library](#allow-additional-file-formats-for-the-media-library)
-- [Add Categories for Attachments](#add-categories-for-attachments)
-- [Add Tags for Attachments](#add-tags-for-attachments)
-- [Add Custom Excerpt to Pages](#add-custom-excerpt-to-pages)
-- [Create a Global String](#create-a-global-string)
+- [Allow Additional File Formats For The Media Library](#allow-additional-file-formats-for-the-media-library)
+- [Add Categories For Attachments](#add-categories-for-attachments)
+- [Add Tags For Attachments](#add-tags-for-attachments)
+- [Add Custom Excerpt To Pages](#add-custom-excerpt-to-pages)
+- [Create A Global String](#create-a-global-string)
 - [Support Featured Images](#support-featured-images)
 - [Support Search Form](#support-search-form)
 - [Excluding pages from search](#excluding-pages-from-search)
 - [Disable XMLRPC](#disable-xmlrpcphp)
-- [Escape HTML in Posts](#escape-html-in-posts)
+- [Escape HTML In Posts](#escape-html-in-posts)
 - [Create Custom Global Settings](#create-custom-global-settings)
 - [Remove WordPress Admin Bar](#remove-wordpress-admin-bar)
 - [Add Open Graph Meta Tags](#add-open-graph-meta-tags)
 - [Add Custom Post Type](#add-custom-post-type)
-- [Implement Preconnect to Google Fonts in Themes](#implement-preconnect-to-google-fonts-in-themes)
-- [Add Thumbnail Column to Post Listing](#add-thumbnail-column-to-post-listing)
-- [Add Lead Class to First Paragraph](#add-lead-class-to-first-paragraph)
-- [Exclude Custom Post Type from Search](#exclude-custom-post-type-from-search)
-- [Remove Query String from Static Resources](#remove-query-string-from-static-resources)
+- [Implement Preconnect To Google Fonts In Themes](#implement-preconnect-to-google-fonts-in-themes)
+- [Add Thumbnail Column To Post Listing](#add-thumbnail-column-to-post-listing)
+- [Add Lead Class To First Paragraph](#add-lead-class-to-first-paragraph)
+- [Exclude Custom Post Type From Search](#exclude-custom-post-type-from-search)
+- [Remove Query String From Static Resources](#remove-query-string-from-static-resources)
 - [Disable Website Field From Comment Form](#disable-website-field-from-comment-form)
 - [Modify jQuery](#modify-jquery)
 - [Disable JSON Rest API](#disable-json-rest-api)
 - [Switch Post Type](#switch-post-type)
 - [PHP Logger](#php-logger)
-- [Always Show Second Bar in TinyMCE](#always-show-second-bar-in-tinymce)
-- [Remove Admin Menu Items Depending on User Role](#remove-admin-menu-items-depending-on-user-role)
-- [Remove Admin Menu Items Depending on Email Address (Domain)](#remove-admin-menu-items-depending-on-email-address-domain)
+- [Always Show Second Bar In TinyMCE](#always-show-second-bar-in-tinymce)
+- [Remove Admin Menu Items Depending On User Role](#remove-admin-menu-items-depending-on-user-role)
+- [Remove Admin Menu Items Depending On Email Address (Domain)](#remove-admin-menu-items-depending-on-email-address-domain)
 - [Reorder Admin Menu Items](#reorder-admin-menu-items)
-- [Exclude a Category From WordPress Loops](#exclude-a-category-from-wordpress-loops)
-- [Disable the JQMIGRATE warning message](#disable-the-jqmigrate-warning-message)
-- [Disable Gutenberg from WordPress 5 Without a Plugin](#disable-gutenberg-from-wordpress-5-without-a-plugin)
-- [Disable Automatic Updates in WordPress](#disable-automatic-updates-in-wordpress)
+- [Exclude A Category From WordPress Loops](#exclude-a-category-from-wordpress-loops)
+- [Disable The JQMIGRATE Warning Message](#disable-the-jqmigrate-warning-message)
+- [Disable Gutenberg From WordPress 5 Without A Plugin](#disable-gutenberg-from-wordpress-5-without-a-plugin)
+- [Disable Automatic Updates In WordPress](#disable-automatic-updates-in-wordpress)
 - [Disable Automatic WordPress Plugin Updates](#disable-automatic-wordpress-plugin-updates)
 - [Disable Automatic WordPress Theme Updates](#disable-automatic-wordpress-theme-updates)
-- [Cleanup Image Edits in WordPress](#cleanup-image-edits-in-wordpress)
-- [Specify the Number of Post Revisions](#specify-the-number-of-post-revisions)
+- [Cleanup Image Edits In WordPress](#cleanup-image-edits-in-wordpress)
+- [Specify The Number Of Post Revisions](#specify-the-number-of-post-revisions)
 - [Disable Post Revisions](#disable-post-revisions)
 - [Show Popular Posts Without Plugins](#show-popular-posts-without-plugins)
-- [Linking Images Within a Theme](#linking-images-within-a-theme)
-- [Display different menus to logged-in users](#display-different-menus-to-logged-in-users)
-- [Send email to admin if user updated his profile](#send-email-to-admin-if-user-updated-his-profile)
+- [Linking Images Within A Theme](#linking-images-within-a-theme)
+- [Display Different Menus To Logged-In Users](#display-different-menus-to-logged-in-users)
+- [Send Email To Admin If User Updated His Profile](#send-email-to-admin-if-user-updated-his-profile)
+- [Create New Custom Widget](#create-new-custom-widget)
 
 **WOOCOMMERCE**
 
-- [Create a Message for Remaining Amount of a Purchase for Free Delivery in WooCommerce](#create-a-message-for-remaining-amount-of-a-purchase-for-free-delivery-in-woocommerce)
-- [Change the Appearance of a Foreign Currency in WooCommerce](#change-the-appearance-of-a-foreign-currency-in-woocommerce)
-- [Remove Specific Product Tabs in WooCommerce](#remove-specific-product-tabs-in-woocommerce)
-- [Add a Message to the Login or Registration Form in WooCommerce](#add-a-message-to-the-login-or-registration-form-in-woocommerce)
-- [Display All Products Purchased by User via Shortcode in WooCommerce](#display-all-products-purchased-by-user-via-shortcode-in-woocommerce)
-- [How To Add Custom Post Type to WooCommerce](#how-to-add-custom-post-type-to-woocommerce)
-- [How to Add a New Tab at My Account Page in WooCommerce](#how-to-add-a-new-tab-at-my-account-page-in-woocommerce)
-- [How to Reorder a Custom Tab at My Account Page in WooCommerce](#how-to-reorder-a-custom-tab-at-my-account-page-in-woocommerce)
+- [Create A Message For Remaining Amount Of A Purchase For Free Delivery In WooCommerce](#create-a-message-for-remaining-amount-of-a-purchase-for-free-delivery-in-woocommerce)
+- [Change The Appearance Of A Foreign Currency In WooCommerce](#change-the-appearance-of-a-foreign-currency-in-woocommerce)
+- [Remove Specific Product Tabs In WooCommerce](#remove-specific-product-tabs-in-woocommerce)
+- [Add A Message To The Login Or Registration Form In WooCommerce](#add-a-message-to-the-login-or-registration-form-in-woocommerce)
+- [Display All Products Purchased By User Via Shortcode In WooCommerce](#display-all-products-purchased-by-user-via-shortcode-in-woocommerce)
+- [How To Add Custom Post Type To WooCommerce](#how-to-add-custom-post-type-to-woocommerce)
+- [How To Add A New Tab At My Account Page In WooCommerce](#how-to-add-a-new-tab-at-my-account-page-in-woocommerce)
+- [How To Reorder A Custom Tab At My Account Page In WooCommerce](#how-to-reorder-a-custom-tab-at-my-account-page-in-woocommerce)
 
 **SECURITY**
 
-- [Disable Theme or Plugin Editor in WP Admin](#disable-theme-or-plugin-editor-in-wp-admin)
+- [Disable Theme Or Plugin Editor In WP Admin](#disable-theme-or-plugin-editor-in-wp-admin)
 - [Remove WordPress Version](#remove-wordpress-version)
 
 **OTHER**
 
-- [Default robots.txt for WordPress](#default-robotstxt-for-wordpress)
-- [Simple .htaccess for WordPress](#simple-htaccess-for-wordpress)
+- [Default robots.txt For WordPress](#default-robotstxt-for-wordpress)
+- [Simple .htaccess For WordPress](#simple-htaccess-for-wordpress)
 
 # WordPress
 
@@ -1202,6 +1203,82 @@ function user_profile_update( $user_id ) {
 add_action( 'profile_update', 'user_profile_update', 10, 2 );
 ```
 
+## Create New Custom Widget
+
+```php
+class New_Widget extends WP_Widget {
+
+	function __construct() {
+		parent::__construct(
+			'new_widget',
+			esc_html__( 'Widget', 'textdomain' )
+		);
+	}
+
+	private $widget_fields = array(
+	);
+
+	public function widget( $args, $instance ) {
+		echo $args['before_widget'];
+
+		if ( ! empty( $instance['title'] ) ) {
+			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
+		}
+
+		// Output generated fields
+		
+		echo $args['after_widget'];
+	}
+
+	public function field_generator( $instance ) {
+		$output = '';
+		foreach ( $this->widget_fields as $widget_field ) {
+			$default = '';
+			if ( isset($widget_field['default']) ) {
+				$default = $widget_field['default'];
+			}
+			$widget_value = ! empty( $instance[$widget_field['id']] ) ? $instance[$widget_field['id']] : esc_html__( $default, 'textdomain' );
+			switch ( $widget_field['type'] ) {
+				default:
+					$output .= '<p>';
+					$output .= '<label for="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'">'.esc_attr( $widget_field['label'], 'textdomain' ).':</label> ';
+					$output .= '<input class="widefat" id="'.esc_attr( $this->get_field_id( $widget_field['id'] ) ).'" name="'.esc_attr( $this->get_field_name( $widget_field['id'] ) ).'" type="'.$widget_field['type'].'" value="'.esc_attr( $widget_value ).'">';
+					$output .= '</p>';
+			}
+		}
+		echo $output;
+	}
+
+	public function form( $instance ) {
+		$title = ! empty( $instance['title'] ) ? $instance['title'] : esc_html__( '', 'textdomain' );
+		?>
+		<p>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_attr_e( 'Title:', 'textdomain' ); ?></label>
+			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+		</p>
+		<?php
+		$this->field_generator( $instance );
+	}
+
+	public function update( $new_instance, $old_instance ) {
+		$instance = array();
+		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+		foreach ( $this->widget_fields as $widget_field ) {
+			switch ( $widget_field['type'] ) {
+				default:
+					$instance[$widget_field['id']] = ( ! empty( $new_instance[$widget_field['id']] ) ) ? strip_tags( $new_instance[$widget_field['id']] ) : '';
+			}
+		}
+		return $instance;
+	}
+}
+
+function register_new_widget() {
+	register_widget( 'New_Widget' );
+}
+add_action( 'widgets_init', 'register_new_widget' );
+```
+
 # WooCommerce
 
 ## Change The Appearance Of A Foreign Currency In WooCommerce
@@ -1418,7 +1495,7 @@ function wc_add_to_cart_button($content) {
 
 **Note:** You have to call `wc_print_notices()` function in your `single-{post_type}.php`. This will display the messages like: **"'Hello world!' has been added to your cart."**.
 
-## How To Add A New Tab At My Account Page iIn WooCommerce
+## How To Add A New Tab At My Account Page In WooCommerce
 
 ```php
 /**
