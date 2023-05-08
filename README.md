@@ -1641,3 +1641,9 @@ RewriteRule . /index.php [L]
 2. Edit a copy of the file and delete the current information.
 3. Copy and paste the snippet above to the file.
 4. Save the file.
+
+---
+
+## License
+
+This project is released under the MIT License.
