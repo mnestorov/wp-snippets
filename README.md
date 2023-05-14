@@ -1,10 +1,14 @@
-# Useful WordPress/WooCommerce Snippets and Functions
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/wordpress/wordpress.png" width="100" alt="Laravel Logo"></a></p>
+
+# WordPress Snippets
+
+## Overview
 
 This is a list of useful **WordPress** and **WooCommerce** code snippets and functions that I often reference to enhance or clean up my sites. 
 
 **Note:** Please be careful and make backups!
 
-**WORDPRESS**
+## WordPress
 
 - [Hide WordPress Update Nag To All But Admins](#hide-wordpress-update-nag-to-all-but-admins)
 - [Utilize Proper WordPress Titles](#utilize-proper-wordpress-titles)
@@ -65,7 +69,7 @@ This is a list of useful **WordPress** and **WooCommerce** code snippets and fun
 - [Send Email To Admin If User Updated His Profile](#send-email-to-admin-if-user-updated-his-profile)
 - [Create New Custom Widget](#create-new-custom-widget)
 
-**WOOCOMMERCE**
+## WooCommerce
 
 - [Create A Message For Remaining Amount Of A Purchase For Free Delivery In WooCommerce](#create-a-message-for-remaining-amount-of-a-purchase-for-free-delivery-in-woocommerce)
 - [Change The Appearance Of A Foreign Currency In WooCommerce](#change-the-appearance-of-a-foreign-currency-in-woocommerce)
@@ -76,19 +80,21 @@ This is a list of useful **WordPress** and **WooCommerce** code snippets and fun
 - [How To Add A New Tab At My Account Page In WooCommerce](#how-to-add-a-new-tab-at-my-account-page-in-woocommerce)
 - [How To Reorder A Custom Tab At My Account Page In WooCommerce](#how-to-reorder-a-custom-tab-at-my-account-page-in-woocommerce)
 
-**SECURITY**
+## Security
 
 - [Disable Theme Or Plugin Editor In WP Admin](#disable-theme-or-plugin-editor-in-wp-admin)
 - [Remove WordPress Version](#remove-wordpress-version)
 
-**OTHER**
+## Other
 
 - [Default robots.txt For WordPress](#default-robotstxt-for-wordpress)
 - [Simple .htaccess For WordPress](#simple-htaccess-for-wordpress)
 
-# WordPress
+---
 
-## Hide WordPress Update Nag To All But Admins
+## WordPress
+
+### Hide WordPress Update Nag To All But Admins
 
 ```php
 /**
@@ -103,7 +109,7 @@ function hide_update_notice_to_all_but_admin() {
 add_action( 'admin_head', 'hide_update_notice_to_all_but_admin', 1 );
 ```
 
-## Utilize Proper WordPress Titles
+### Utilize Proper WordPress Titles
 
 Make sure to remove the `<title>` tag from your header.
 
@@ -114,7 +120,7 @@ Make sure to remove the `<title>` tag from your header.
 add_theme_support( 'title-tag' );
 ```
 
-## Create Custom WordPress Dashboard Widget
+### Create Custom WordPress Dashboard Widget
 
 ```php
 /**
@@ -134,7 +140,7 @@ function add_dashboard_widgets() {
 add_action( 'wp_dashboard_setup', 'add_dashboard_widgets' );
 ```
 
-## Remove All Dashboard Widgets
+### Remove All Dashboard Widgets
 
 ```php
 /**
@@ -158,7 +164,7 @@ function remove_dashboard_widgets() {
 add_action( 'wp_dashboard_setup', 'remove_dashboard_widgets' );
 ```
 
-## Include Navigation Menus
+### Include Navigation Menus
 
 ```php
 /** 
@@ -193,7 +199,7 @@ function register_my_menus() {
 add_action( 'init', 'register_my_menus' );
 ```
 
-## Insert Custom Login Logo
+### Insert Custom Login Logo
 
 ```php
 /**
@@ -216,7 +222,7 @@ function custom_login_logo() {
 add_action( 'login_head', 'custom_login_logo' );
 ```
 
-## Modify Admin Footer Text
+### Modify Admin Footer Text
 
 ```php
 /**
@@ -229,7 +235,7 @@ function modify_footer() {
 add_filter( 'admin_footer_text', 'modify_footer' );
 ```
 
-## Enqueue Styles And Scripts
+### Enqueue Styles And Scripts
 
 ```php
 /**
@@ -245,7 +251,7 @@ function custom_scripts() {
 add_action( 'wp_enqueue_scripts', 'custom_scripts' );
 ```
 
-## Enqueue Google Fonts
+### Enqueue Google Fonts
 
 ```php
 /**
@@ -259,7 +265,7 @@ function google_fonts() {
 add_action( 'wp_print_styles', 'google_fonts' );
 ```
 
-## Modify Excerpt Length
+### Modify Excerpt Length
 
 ```php
 /**
@@ -272,7 +278,7 @@ function custom_excerpt_length( $length ) {
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 ```
 
-## Change Read More Link
+### Change Read More Link
 
 ```php
 /**
@@ -285,7 +291,7 @@ function custom_read_more_link() {
 add_filter( 'the_content_more_link', 'custom_read_more_link' );
 ```
 
-## Change More Excerpt
+### Change More Excerpt
 
 ```php
 /**
@@ -298,7 +304,7 @@ function custom_more_excerpt( $more ) {
 add_filter( 'excerpt_more', 'custom_more_excerpt' );
 ```
 
-## Disable Emoji Mess
+### Disable Emoji Mess
 
 ```php
 /**
@@ -323,7 +329,7 @@ function disable_emojicons_tinymce( $plugins ) {
 }
 ```
 
-## Remove Comments
+### Remove Comments
 
 ```php
 /**
@@ -354,7 +360,7 @@ function mytheme_admin_bar_render() {
 add_action( 'wp_before_admin_bar_render', 'mytheme_admin_bar_render' );
 ```
 
-## Change Media Gallery URL
+### Change Media Gallery URL
 
 ```php
 /**
@@ -376,7 +382,7 @@ add_filter( 'pre_option_upload_url_path', function() {
 });
 ```
 
-## Create Custom Thumbnail Size
+### Create Custom Thumbnail Size
 
 ```php
 /**
@@ -399,7 +405,7 @@ Since WordPress 4.4.0, you can use:
 the_post_thumbnail_url( $size );
 ```
 
-## Allow Additional File Formats For the Media Library
+### Allow Additional File Formats For the Media Library
 
 ```php
 /**
@@ -420,7 +426,7 @@ add_filter( 'upload_mimes', 'add_custom_mime_types' );
 ```
 
 
-## Add Categories For Attachments
+### Add Categories For Attachments
 
 ```php
 /**
@@ -433,7 +439,7 @@ function add_categories_for_attachments() {
 add_action( 'init' , 'add_categories_for_attachments' );
 ```
 
-## Add Tags For Attachments
+### Add Tags For Attachments
 
 ```php
 /**
@@ -446,7 +452,7 @@ function add_tags_for_attachments() {
 add_action( 'init' , 'add_tags_for_attachments' );
 ```
 
-## Add Custom Excerpt To Pages
+### Add Custom Excerpt To Pages
 
 ```php
 /**
@@ -459,7 +465,7 @@ function add_page_excerpt() {
 add_action( 'init', 'add_page_excerpt' );
 ```
 
-## Create A Global String
+### Create A Global String
 
 ```php
 /**
@@ -476,7 +482,7 @@ function global_string() {
 echo global_string();
 ```
 
-## Support Featured Images
+### Support Featured Images
 
 ```php
 /**
@@ -485,7 +491,7 @@ echo global_string();
 add_theme_support( 'post-thumbnails' );
 ```
 
-## Support Search Form
+### Support Search Form
 
 ```php
 /**
@@ -494,7 +500,7 @@ add_theme_support( 'post-thumbnails' );
 add_theme_support( 'html5', array( 'search-form' ) );
 ```
 
-## Excluding Pages From Search
+### Excluding Pages From Search
 
 ```php
 /**
@@ -508,7 +514,7 @@ function exclude_pages_from_search() {
 add_action( 'init', 'exclude_pages_from_search' );
 ```
 
-## Disable xmlrpc.php
+### Disable xmlrpc.php
 
 ```php
 /**
@@ -520,7 +526,7 @@ remove_action( 'wp_head', 'rsd_link' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
 ```
 
-## Escape HTML In Posts
+### Escape HTML In Posts
 
 ```php
 /**
@@ -564,7 +570,7 @@ add_filter( 'excerpt_save_pre', 'filterCode', 9 );
 
 Modified from [Escape HTML](https://wordpress.org/plugins/escape-html/).
 
-## Create Custom Global Settings
+### Create Custom Global Settings
 
 ```php
 /**
@@ -603,7 +609,7 @@ function custom_settings_page_setup() {
 add_action( 'admin_init', 'custom_settings_page_setup' );
 ```
 
-Retrieve Field
+**Retrieve Field**
 
 ```php
 echo get_option( 'twitter' );
@@ -611,7 +617,7 @@ echo get_option( 'twitter' );
 
 Modified from [Create a WordPress Theme Settings Page with the Settings API](http://www.sitepoint.com/create-a-wordpress-theme-settings-page-with-the-settings-api/).
 
-## Remove WordPress Admin Bar
+### Remove WordPress Admin Bar
 
 ```php
 /**
@@ -624,7 +630,7 @@ function remove_admin_bar() {
 add_action( 'get_header', 'remove_admin_bar' );
 ```
 
-## Add Open Graph Meta Tags
+### Add Open Graph Meta Tags
 
 ```php
 /**
@@ -667,7 +673,7 @@ function meta_og() {
 add_action('wp_head', 'meta_og', 5);
 ```
 
-## Add Custom Post Type
+### Add Custom Post Type
 
 ```php
 /**
@@ -707,7 +713,7 @@ add_action( 'init', 'create_custom_post' );
 
 [Dashicons](https://developer.wordpress.org/resource/dashicons/#menu)
 
-## Implement Preconnect To Google Fonts In Themes
+### Implement Preconnect To Google Fonts In Themes
 
 ```php
 /**
@@ -739,7 +745,7 @@ function twentyfifteen_resource_hints( $urls, $relation_type ) {
 add_filter( 'wp_resource_hints', 'twentyfifteen_resource_hints', 10, 2 ); 
 ```
 
-## Add Thumbnail Column To Post Listing
+### Add Thumbnail Column To Post Listing
 
 ```php
 /**
@@ -780,7 +786,7 @@ if ( function_exists( 'add_theme_support' ) ) {
     add_action( 'manage_posts_custom_column' , 'wpcs_add_thumbnail_columns_data', 10, 2 );
 }
 ```
-## Add Lead Class To First Paragraph
+### Add Lead Class To First Paragraph
 
 ```php
 /**
@@ -795,7 +801,7 @@ add_filter( 'the_content', 'first_paragraph' );
 
 Adds a `lead` class to the first paragraph in [the_content](https://developer.wordpress.org/reference/functions/the_content/).
 
-## Exclude Custom Post Type From Search
+### Exclude Custom Post Type From Search
 
 ```php
 /**
@@ -811,7 +817,7 @@ function excludePages( $query ) {
 add_filter( 'pre_get_posts','excludePages' );
 ```
 
-## Remove Query String From Static Resources
+### Remove Query String From Static Resources
 
 ```php
 /**
@@ -829,7 +835,7 @@ add_filter( 'style_loader_src', 'remove_cssjs_ver', 10, 2 );
 add_filter( 'script_loader_src', 'remove_cssjs_ver', 10, 2 );
 ```
 
-## Modify jQuery
+### Modify jQuery
 
 ```php
 /**
@@ -844,7 +850,7 @@ function modify_jquery() {
 if ( ! is_admin() ) add_action( 'wp_enqueue_scripts', 'modify_jquery' );
 ```
 
-##  Disable Website Field From Comment Form
+###  Disable Website Field From Comment Form
 
 ```php
 /** 
@@ -861,7 +867,7 @@ function disable_website_field( $field ) {
 add_filter('comment_form_default_fields', 'disable_website_field');
 ```
 
-##  Disable JSON REST API
+###  Disable JSON REST API
 
 ```php
 /** 
@@ -871,7 +877,7 @@ add_filter( 'json_enabled', '__return_false' );
 add_filter( 'json_jsonp_enabled', '__return_false' );
 ```
 
-## Switch Post Type
+### Switch Post Type
 
 ```php
 /**
@@ -891,7 +897,7 @@ function switch_post_type ( $old_post_type, $new_post_type ) {
 }
 ```
 
-## PHP Logger
+### PHP Logger
 
 ```php
 /**
@@ -907,7 +913,7 @@ function php_logger( $data ) {
 }
 ```
 
-## Always Show Second Bar In TinyMCE
+### Always Show Second Bar In TinyMCE
 
 ```php
 /**
@@ -921,7 +927,7 @@ function show_tinymce_toolbar( $in ) {
 add_filter( 'tiny_mce_before_init', 'show_tinymce_toolbar' );
 ```
 
-## Remove Admin Menu Items Depending On User Role
+### Remove Admin Menu Items Depending On User Role
 
 ```php
 /**
@@ -970,7 +976,7 @@ function remove_dashboard_menus() {
 add_action( 'admin_menu', 'remove_dashboard_menus' );
 ```
 
-## Remove Admin Menu Items Depending On Email Address (domain)
+### Remove Admin Menu Items Depending On Email Address (domain)
 
 ```php
 /**
@@ -1006,7 +1012,7 @@ function remove_dashboard_menus() {
 add_action( 'admin_menu', 'remove_dashboard_menus' );
 ```
 
-## Reorder Admin Menu Items
+### Reorder Admin Menu Items
 
 ```php
 /**
@@ -1036,7 +1042,7 @@ add_filter( 'custom_menu_order', 'custom_menu_order' );
 add_filter( 'menu_order', 'custom_menu_order' );
 ```
 
-## Exclude A Category From WordPress Loops
+### Exclude A Category From WordPress Loops
 
 ```php
 /**
@@ -1058,7 +1064,7 @@ add_action( 'pre_get_posts', function( $query ) { // anonymous callback
 });
 ```
 
-## Disable The JQMIGRATE Warning Message
+### Disable The JQMIGRATE Warning Message
 
 ```php
 /**
@@ -1071,13 +1077,13 @@ add_action('wp_default_scripts', function ($scripts) {
 });
 ```
 
-## Disable Gutenberg From WordPress 5 Without A Plugin
+### Disable Gutenberg From WordPress 5 Without A Plugin
 
 ```php
 add_filter( 'use_block_editor_for_post', '__return_false' );
 ```
 
-## Disable Automatic Updates In WordPress
+### Disable Automatic Updates In WordPress
 
 ```php
 define( 'WP_AUTO_UPDATE_CORE', false );
@@ -1087,19 +1093,19 @@ define( 'WP_AUTO_UPDATE_CORE', false );
 
 You can disable automatic updates in WordPress by adding this line of code in your **_wp-config.php_**.
 
-## Disable Automatic WordPress Plugin Updates
+### Disable Automatic WordPress Plugin Updates
 
 ```php
 add_filter( 'auto_update_plugin', '__return_false' );
 ```
 
-## Disable Automatic WordPress Theme Updates
+### Disable Automatic WordPress Theme Updates
 
 ```php
 add_filter( 'auto_update_theme', '__return_false' );
 ```
 
-## Cleanup Image Edits In WordPress
+### Cleanup Image Edits In WordPress
 
 ```php
 define( 'IMAGE_EDIT_OVERWRITE', true );
@@ -1111,7 +1117,7 @@ By default, WordPress creates a new set of images every time an image is edited.
 
 You can define cleanup image edits in WordPress by adding this line of code in your **_wp-config.php_**.
 
-## Specify The Number Of Post Revisions
+### Specify The Number Of Post Revisions
 
 ```php
 define('WP_POST_REVISIONS', 3);
@@ -1123,7 +1129,7 @@ If you want to specify a maximum number of revisions, change false to an integer
 
 You can specify the number of post revisions in WordPress by adding this line of code in your **_wp-config.php_**.
 
-## Disable Post Revisions
+### Disable Post Revisions
 
 ```php
 define( 'WP_POST_REVISIONS', false );
@@ -1135,7 +1141,7 @@ By default, WordPress will save copies of each edit made to a post or page, allo
 
 You can disable post revisions in WordPress by adding this line of code in your **_wp-config.php_**.
 
-## Show Popular Posts Without Plugins
+### Show Popular Posts Without Plugins
 
 ```php
 /**
@@ -1157,7 +1163,7 @@ function count_post_visits() {
 add_action( 'wp_head', 'count_post_visits' );
 ```
 
-## Linking Images Within A Theme
+### Linking Images Within A Theme
 
 ```php
 <img src="<?php bloginfo( 'stylesheet_directory' ); ?>/img/image.png" />
@@ -1169,7 +1175,7 @@ or
 <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/image.jpg" />
 ```
 
-## Display Different Menus To Logged-In Users
+### Display Different Menus To Logged-In Users
 
 ```php
 function nav_menu_args( $args = '' ) {
@@ -1185,7 +1191,7 @@ function nav_menu_args( $args = '' ) {
 add_filter( 'wp_nav_menu_args', 'nav_menu_args' );
 ```
 
-## Send Email To Admin If User Updated His Profile
+### Send Email To Admin If User Updated His Profile
 
 ```php
 function user_profile_update( $user_id ) {
@@ -1203,7 +1209,7 @@ function user_profile_update( $user_id ) {
 add_action( 'profile_update', 'user_profile_update', 10, 2 );
 ```
 
-## Create New Custom Widget
+### Create New Custom Widget
 
 ```php
 class New_Widget extends WP_Widget {
@@ -1279,9 +1285,9 @@ function register_new_widget() {
 add_action( 'widgets_init', 'register_new_widget' );
 ```
 
-# WooCommerce
+## WooCommerce
 
-## Change The Appearance Of A Foreign Currency In WooCommerce
+### Change The Appearance Of A Foreign Currency In WooCommerce
 
 ```php
 function wc_change_bgn_currency_symbol( $currency_symbol, $currency ) {
@@ -1297,7 +1303,7 @@ function wc_change_bgn_currency_symbol( $currency_symbol, $currency ) {
 add_filter( 'woocommerce_currency_symbol', 'wc_change_bgn_currency_symbol', 10, 2 );
 ```
 
-## Create A Message For Remaining Amount Of A Purchase For Free Delivery In WooCommerce
+### Create A Message For Remaining Amount Of A Purchase For Free Delivery In WooCommerce
 
 ```php
 /**
@@ -1343,7 +1349,7 @@ function wc_free_shipping_cart_notice() {
 add_action( 'woocommerce_before_cart', 'wc_free_shipping_cart_notice' );
 ```
 
-## Remove Specific Product Tabs In WooCommerce
+### Remove Specific Product Tabs In WooCommerce
 
 ```php
 function wc_remove_product_tabs( $tabs ) {
@@ -1362,7 +1368,7 @@ function wc_remove_product_tabs( $tabs ) {
 add_filter( 'woocommerce_product_tabs', 'wc_remove_product_tabs', 99 );
 ```
 
-## Add A Message To The Login Or Registration Form In WooCommerce
+### Add A Message To The Login Or Registration Form In WooCommerce
 
 ```php
 function wc_custom_login_message() {
@@ -1377,7 +1383,7 @@ function wc_custom_login_message() {
 add_action( 'woocommerce_before_customer_login_form', 'wc_custom_login_message' );
 ```
 
-## Display All Products Purchased By User Via Shortcode In WooCommerce
+### Display All Products Purchased By User Via Shortcode In WooCommerce
 
 ```php 
 add_shortcode( 'my_products', 'wc_user_products_bought' );
@@ -1437,7 +1443,7 @@ function wc_user_products_bought() {
 }
 ```
 
-## How To Add Custom Post Type To WooCommerce
+### How To Add Custom Post Type To WooCommerce
 
 **Step 1**
 
@@ -1495,7 +1501,7 @@ function wc_add_to_cart_button($content) {
 
 **Note:** You have to call `wc_print_notices()` function in your `single-{post_type}.php`. This will display the messages like: **"'Hello world!' has been added to your cart."**.
 
-## How To Add A New Tab At My Account Page In WooCommerce
+### How To Add A New Tab At My Account Page In WooCommerce
 
 ```php
 /**
@@ -1546,7 +1552,7 @@ function woo_custom_premium_support_content() {
 add_action( 'woocommerce_account_premium-support_endpoint', 'woo_custom_premium_support_content' );
 ```
 
-## How To Reorder A Custom Tab At My Account Page In WooCommerce
+### How To Reorder A Custom Tab At My Account Page In WooCommerce
 
 ```php
 /**
@@ -1568,9 +1574,9 @@ function woo_reorder_my_account_menu() {
 add_filter ( 'woocommerce_account_menu_items', 'woo_reorder_my_account_menu' );
 ```
 
-# Security
+## Security
 
-## Disable Theme Or Plugin Editor In WP Admin
+### Disable Theme Or Plugin Editor In WP Admin
 
 ```php 
 define( 'DISALLOW_FILE_EDIT', true ); 
@@ -1583,7 +1589,7 @@ define( 'DISALLOW_FILE_EDIT', true );
 3. Past the code above to the end of this file.
 4. Save and close.
 
-## Remove WordPress Version
+### Remove WordPress Version
 
 ```php 
 /**
@@ -1596,9 +1602,9 @@ function remove_wp_version() {
 add_filter( 'the_generator', 'remove_wp_version' );
 ```
 
-# Other
+## Other
 
-## Default robots.txt For WordPress
+### Default robots.txt For WordPress
 
 ```txt
 User-Agent: *
@@ -1620,7 +1626,7 @@ Sitemap: http://www.sitename.com/page-sitemap.xml
 3. Switch the placeholder information with your unique address and save the file.
 4. Drop the file in your root directory for your website.
 
-## Simple .htaccess For WordPress
+### Simple .htaccess For WordPress
 
 ```txt
 # BEGIN WordPress
